@@ -1,0 +1,24 @@
+=== Taint Backward Tracking ===
+Source: x10
+Total matched: 6 instructions
+Stop reason: all taint cleared
+============================================================
+
+[6613831] [libmetasec_ov.so] 0x7984348850!0x13c850 mov x10, xzr; x10=0x91 -> x10=0x0 
+      tainted: {}
+
+[6613852] [libmetasec_ov.so] 0x79843488a4!0x13c8a4 add x10, x10, #3; x10=0x0 x10=0x0 -> x10=0x3 
+      tainted: {x10}
+
+[6613877] [libmetasec_ov.so] 0x79843488a4!0x13c8a4 add x10, x10, #3; x10=0x3 x10=0x3 -> x10=0x6 
+      tainted: {x10}
+
+[6613902] [libmetasec_ov.so] 0x79843488a4!0x13c8a4 add x10, x10, #3; x10=0x6 x10=0x6 -> x10=0x9 
+      tainted: {x10}
+
+[6613927] [libmetasec_ov.so] 0x79843488a4!0x13c8a4 add x10, x10, #3; x10=0x9 x10=0x9 -> x10=0xc 
+      tainted: {x10}
+
+[6613934] [libmetasec_ov.so] 0x798434885c!0x13c85c add x9, x3, x10; x9=0x7cf8b8d7c0 x3=0x7d78baf8f0 x10=0xc -> x9=0x7d78baf8fc 
+      tainted: {x10}
+

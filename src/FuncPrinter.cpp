@@ -4,74 +4,165 @@
 
 #include "FuncPrinter.h"
 
-const std::vector<std::string> call_jni_methods = {"CallStaticObjectMethod",
-                                                 "CallStaticObjectMethodV",
-                                                 "CallStaticObjectMethodA",
-                                                 "CallStaticBooleanMethod",
-                                                 "CallStaticBooleanMethodV",
-                                                 "CallStaticBooleanMethodA",
-                                                 "CallStaticByteMethod", "CallStaticByteMethodV",
-                                                 "CallStaticByteMethodA",
-                                                 "CallStaticCharMethod", "CallStaticCharMethodV",
-                                                 "CallStaticCharMethodA",
-                                                 "CallStaticShortMethod", "CallStaticShortMethodV",
-                                                 "CallStaticShortMethodA",
-                                                 "CallStaticIntMethod", "CallStaticIntMethodV",
-                                                 "CallStaticIntMethodA",
-                                                 "CallStaticLongMethod", "CallStaticLongMethodV",
-                                                 "CallStaticLongMethodA",
-                                                 "CallStaticFloatMethod", "CallStaticFloatMethodV",
-                                                 "CallStaticFloatMethodA",
-                                                 "CallStaticDoubleMethod",
-                                                 "CallStaticDoubleMethodV",
-                                                 "CallStaticDoubleMethodA",
-                                                 "CallStaticVoidMethod", "CallStaticVoidMethodV",
-                                                 "CallStaticVoidMethodA",
-                                                 "CallObjectMethod", "CallObjectMethodV",
-                                                 "CallObjectMethodA", "CallBooleanMethod",
-                                                 "CallBooleanMethodV",
-                                                 "CallBooleanMethodA", "CallByteMethod",
-                                                 "CallByteMethodV", "CallByteMethodA",
-                                                 "CallCharMethod", "CallCharMethodV",
-                                                 "CallCharMethodA", "CallShortMethod",
-                                                 "CallShortMethodV", "CallShortMethodA",
-                                                 "CallIntMethod", "CallIntMethodV",
-                                                 "CallIntMethodA", "CallLongMethod",
-                                                 "CallLongMethodV", "CallLongMethodA",
-                                                 "CallFloatMethod", "CallFloatMethodV",
-                                                 "CallFloatMethodA", "CallDoubleMethod",
-                                                 "CallDoubleMethodV", "CallDoubleMethodA",
-                                                 "CallVoidMethod", "CallVoidMethodV",
-                                                 "CallVoidMethodA", "CallNonvirtualObjectMethod",
-                                                 "CallNonvirtualObjectMethodV",
-                                                 "CallNonvirtualObjectMethodA",
-                                                 "CallNonvirtualBooleanMethod",
-                                                 "CallNonvirtualBooleanMethodV",
-                                                 "CallNonvirtualBooleanMethodA",
-                                                 "CallNonvirtualByteMethod",
-                                                 "CallNonvirtualByteMethodV",
-                                                 "CallNonvirtualByteMethodA",
-                                                 "CallNonvirtualCharMethod",
-                                                 "CallNonvirtualCharMethodV",
-                                                 "CallNonvirtualCharMethodA",
-                                                 "CallNonvirtualShortMethod",
-                                                 "CallNonvirtualShortMethodV",
-                                                 "CallNonvirtualShortMethodA",
-                                                 "CallNonvirtualIntMethod",
-                                                 "CallNonvirtualIntMethodV",
-                                                 "CallNonvirtualIntMethodA",
-                                                 "CallNonvirtualLongMethod",
-                                                 "CallNonvirtualLongMethodV",
-                                                 "CallNonvirtualLongMethodA",
-                                                 "CallNonvirtualFloatMethod",
-                                                 "CallNonvirtualFloatMethodV",
-                                                 "CallNonvirtualFloatMethodA",
-                                                 "CallNonvirtualDoubleMethod",
-                                                 "CallNonvirtualDoubleMethodV",
-                                                 "CallNonvirtualDoubleMethodA",
-                                                 "CallNonvirtualVoidMethod",
-                                                 "CallNonvirtualVoidMethodV",
-                                                 "CallNonvirtualVoidMethodA",};
+const std::unordered_set<std::string> call_jni_methods = {
+    "CallStaticObjectMethod", "CallStaticObjectMethodV", "CallStaticObjectMethodA",
+    "CallStaticBooleanMethod", "CallStaticBooleanMethodV", "CallStaticBooleanMethodA",
+    "CallStaticByteMethod", "CallStaticByteMethodV", "CallStaticByteMethodA",
+    "CallStaticCharMethod", "CallStaticCharMethodV", "CallStaticCharMethodA",
+    "CallStaticShortMethod", "CallStaticShortMethodV", "CallStaticShortMethodA",
+    "CallStaticIntMethod", "CallStaticIntMethodV", "CallStaticIntMethodA",
+    "CallStaticLongMethod", "CallStaticLongMethodV", "CallStaticLongMethodA",
+    "CallStaticFloatMethod", "CallStaticFloatMethodV", "CallStaticFloatMethodA",
+    "CallStaticDoubleMethod", "CallStaticDoubleMethodV", "CallStaticDoubleMethodA",
+    "CallStaticVoidMethod", "CallStaticVoidMethodV", "CallStaticVoidMethodA",
+    "CallObjectMethod", "CallObjectMethodV", "CallObjectMethodA",
+    "CallBooleanMethod", "CallBooleanMethodV", "CallBooleanMethodA",
+    "CallByteMethod", "CallByteMethodV", "CallByteMethodA",
+    "CallCharMethod", "CallCharMethodV", "CallCharMethodA",
+    "CallShortMethod", "CallShortMethodV", "CallShortMethodA",
+    "CallIntMethod", "CallIntMethodV", "CallIntMethodA",
+    "CallLongMethod", "CallLongMethodV", "CallLongMethodA",
+    "CallFloatMethod", "CallFloatMethodV", "CallFloatMethodA",
+    "CallDoubleMethod", "CallDoubleMethodV", "CallDoubleMethodA",
+    "CallVoidMethod", "CallVoidMethodV", "CallVoidMethodA",
+    "CallNonvirtualObjectMethod", "CallNonvirtualObjectMethodV", "CallNonvirtualObjectMethodA",
+    "CallNonvirtualBooleanMethod", "CallNonvirtualBooleanMethodV", "CallNonvirtualBooleanMethodA",
+    "CallNonvirtualByteMethod", "CallNonvirtualByteMethodV", "CallNonvirtualByteMethodA",
+    "CallNonvirtualCharMethod", "CallNonvirtualCharMethodV", "CallNonvirtualCharMethodA",
+    "CallNonvirtualShortMethod", "CallNonvirtualShortMethodV", "CallNonvirtualShortMethodA",
+    "CallNonvirtualIntMethod", "CallNonvirtualIntMethodV", "CallNonvirtualIntMethodA",
+    "CallNonvirtualLongMethod", "CallNonvirtualLongMethodV", "CallNonvirtualLongMethodA",
+    "CallNonvirtualFloatMethod", "CallNonvirtualFloatMethodV", "CallNonvirtualFloatMethodA",
+    "CallNonvirtualDoubleMethod", "CallNonvirtualDoubleMethodV", "CallNonvirtualDoubleMethodA",
+    "CallNonvirtualVoidMethod", "CallNonvirtualVoidMethodV", "CallNonvirtualVoidMethodA",
+};
+
+const std::unordered_map<std::string, BeforeFuncConfig> func_configs = {
+    // 字符串操作
+    {"strstr", {PARAMS_NUMBER_TWO, {STR_INDEX_ZERO, STR_INDEX_ONE}, {}}},
+    {"strlen", {PARAMS_NUMBER_ONE, {STR_INDEX_ZERO}, {}}},
+    {"__strlen_chk", {PARAMS_NUMBER_ONE, {STR_INDEX_ZERO}, {}}},
+    {"__strlen_aarch64", {PARAMS_NUMBER_ONE, {STR_INDEX_ZERO}, {}}},
+    {"strcmp", {PARAMS_NUMBER_TWO, {STR_INDEX_ZERO, STR_INDEX_ONE}, {}}},
+    {"strncmp", {PARAMS_NUMBER_TWO, {STR_INDEX_ZERO, STR_INDEX_ONE}, {}}},
+    {"__strncmp_aarch64", {PARAMS_NUMBER_TWO, {STR_INDEX_ZERO, STR_INDEX_ONE}, {}}},
+    {"strcpy", {PARAMS_NUMBER_TWO, {STR_INDEX_ZERO, STR_INDEX_ONE}, {}}},
+    {"__strcpy_chk", {PARAMS_NUMBER_TWO, {STR_INDEX_ZERO, STR_INDEX_ONE}, {}}},
+    {"strncpy", {PARAMS_NUMBER_TWO, {STR_INDEX_ZERO, STR_INDEX_ONE}, {}}},
+    {"__strncpy_chk", {PARAMS_NUMBER_TWO, {STR_INDEX_ZERO, STR_INDEX_ONE}, {}}},
+    {"strcat", {PARAMS_NUMBER_TWO, {STR_INDEX_ZERO, STR_INDEX_ONE}, {}}},
+    {"__strcat_chk", {PARAMS_NUMBER_TWO, {STR_INDEX_ZERO, STR_INDEX_ONE}, {}}},
+    {"strncat", {PARAMS_NUMBER_TWO, {STR_INDEX_ZERO, STR_INDEX_ONE}, {}}},
+    {"__strncat_chk", {PARAMS_NUMBER_TWO, {STR_INDEX_ZERO, STR_INDEX_ONE}, {}}},
+    {"strdup", {PARAMS_NUMBER_ONE, {STR_INDEX_ZERO}, {}}},
+    {"__strdup_chk", {PARAMS_NUMBER_ONE, {STR_INDEX_ZERO}, {}}},
+    {"strndup", {PARAMS_NUMBER_ONE, {STR_INDEX_ZERO}, {}}},
+    {"__strndup_chk", {PARAMS_NUMBER_ONE, {STR_INDEX_ZERO}, {}}},
+    {"strchr", {PARAMS_NUMBER_ONE, {STR_INDEX_ZERO}, {}}},
+    {"strrchr", {PARAMS_NUMBER_ONE, {STR_INDEX_ZERO}, {}}},
+    {"strspn", {PARAMS_NUMBER_ONE, {STR_INDEX_ZERO}, {}}},
+    {"strcspn", {PARAMS_NUMBER_ONE, {STR_INDEX_ZERO}, {}}},
+    {"strcasestr", {PARAMS_NUMBER_ONE, {STR_INDEX_ZERO}, {}}},
+    {"strlcpy", {PARAMS_NUMBER_THREE, {STR_INDEX_ZERO, STR_INDEX_ONE}, {}}},
+    {"__strlcpy_chk", {PARAMS_NUMBER_THREE, {STR_INDEX_ZERO, STR_INDEX_ONE}, {}}},
+    {"strlcat", {PARAMS_NUMBER_THREE, {STR_INDEX_ZERO, STR_INDEX_ONE}, {}}},
+    {"__strlcat_chk", {PARAMS_NUMBER_THREE, {STR_INDEX_ZERO, STR_INDEX_ONE}, {}}},
+
+    // 内存操作
+    {"memcpy", {PARAMS_NUMBER_THREE, {}, {{HEX_INDEX_ONE, HEX_INDEX_TWO}}}},
+    {"__memcpy_chk", {PARAMS_NUMBER_THREE, {}, {{HEX_INDEX_ONE, HEX_INDEX_TWO}}}},
+    {"__memcpy_aarch64_simd", {PARAMS_NUMBER_THREE, {}, {{HEX_INDEX_ONE, HEX_INDEX_TWO}}}},
+    {"memmove", {PARAMS_NUMBER_THREE, {}, {{HEX_INDEX_ONE, HEX_INDEX_TWO}}}},
+    {"__memmove_chk", {PARAMS_NUMBER_THREE, {}, {{HEX_INDEX_ONE, HEX_INDEX_TWO}}}},
+    {"memset", {PARAMS_NUMBER_THREE, {}, {}}},
+    {"__memset_chk", {PARAMS_NUMBER_THREE, {}, {}}},
+    {"__memset_aarch64", {PARAMS_NUMBER_THREE, {}, {}}},
+    {"memmem", {PARAMS_NUMBER_FOUR, {}, {{HEX_INDEX_ZERO, HEX_INDEX_ONE}, {HEX_INDEX_TWO, HEX_INDEX_THREE}}}},
+    {"memcmp", {PARAMS_NUMBER_THREE, {}, {{HEX_INDEX_ZERO, HEX_INDEX_TWO}, {HEX_INDEX_ONE, HEX_INDEX_TWO}}}},
+    {"__memcmp_aarch64", {PARAMS_NUMBER_THREE, {}, {{HEX_INDEX_ZERO, HEX_INDEX_TWO}, {HEX_INDEX_ONE, HEX_INDEX_TWO}}}},
+    {"memchr", {PARAMS_NUMBER_THREE, {STR_INDEX_ZERO}, {}}},
+    {"__memchr_aarch64", {PARAMS_NUMBER_THREE, {STR_INDEX_ZERO}, {}}},
+
+    // 文件操作
+    {"fopen", {PARAMS_NUMBER_TWO, {STR_INDEX_ZERO, STR_INDEX_ONE}, {}}},
+    {"fopen64", {PARAMS_NUMBER_TWO, {STR_INDEX_ZERO, STR_INDEX_ONE}, {}}},
+    {"read", {PARAMS_NUMBER_THREE, {}, {{HEX_INDEX_ONE, HEX_INDEX_TWO}}}},
+    {"pread64", {PARAMS_NUMBER_THREE, {}, {{HEX_INDEX_ONE, HEX_INDEX_TWO}}}},
+    {"open", {PARAMS_NUMBER_TWO, {STR_INDEX_ZERO}, {}}},
+    {"openat", {PARAMS_NUMBER_FOUR, {STR_INDEX_ONE}, {}}},
+    {"close", {PARAMS_NUMBER_ONE, {}, {}}},
+    {"write", {PARAMS_NUMBER_THREE, {}, {{HEX_INDEX_ONE, HEX_INDEX_TWO}}}},
+    {"pwrite64", {PARAMS_NUMBER_THREE, {}, {{HEX_INDEX_ONE, HEX_INDEX_TWO}}}},
+    {"mknodat", {PARAMS_NUMBER_FOUR, {STR_INDEX_ONE}, {}}},
+    {"mkdirat", {PARAMS_NUMBER_THREE, {STR_INDEX_ONE}, {}}},
+    {"newfstatat", {PARAMS_NUMBER_THREE, {STR_INDEX_ONE}, {}}},
+    {"fstat", {PARAMS_NUMBER_TWO, {}, {}}},
+    {"stat", {PARAMS_NUMBER_TWO, {STR_INDEX_ZERO}, {}}},
+    {"readlink", {PARAMS_NUMBER_THREE, {STR_INDEX_ZERO, STR_INDEX_ONE}, {}}},
+    {"readlinkat", {PARAMS_NUMBER_FOUR, {STR_INDEX_ONE, STR_INDEX_TWO}, {}}},
+    {"opendir", {PARAMS_NUMBER_ONE, {STR_INDEX_ZERO}, {}}},
+    {"access", {PARAMS_NUMBER_TWO, {STR_INDEX_ZERO}, {}}},
+    {"popen", {PARAMS_NUMBER_TWO, {STR_INDEX_ZERO, STR_INDEX_ONE}, {}}},
+    {"pclose", {PARAMS_NUMBER_ONE, {}, {}}},
+
+    // 格式化输出
+    {"sprintf", {PARAMS_NUMBER_TWO, {STR_INDEX_ZERO, STR_INDEX_ONE}, {}}},
+    {"__sprintf_chk", {PARAMS_NUMBER_TWO, {STR_INDEX_ZERO, STR_INDEX_ONE}, {}}},
+    {"snprintf", {PARAMS_NUMBER_THREE, {STR_INDEX_ZERO}, {}}},
+    {"__snprintf_chk", {PARAMS_NUMBER_THREE, {STR_INDEX_ZERO}, {}}},
+    {"vsprintf", {PARAMS_NUMBER_TWO, {STR_INDEX_ZERO}, {}}},
+    {"__vsprintf_chk", {PARAMS_NUMBER_TWO, {STR_INDEX_ZERO}, {}}},
+    {"vsnprintf", {PARAMS_NUMBER_THREE, {STR_INDEX_ZERO}, {}}},
+    {"__vsnprintf_chk", {PARAMS_NUMBER_THREE, {STR_INDEX_ZERO}, {}}},
+    {"fgets", {PARAMS_NUMBER_THREE, {STR_INDEX_ZERO}, {}}},
+    {"__fgets_chk", {PARAMS_NUMBER_THREE, {STR_INDEX_ZERO}, {}}},
+    {"sscanf", {PARAMS_NUMBER_TWO, {STR_INDEX_ZERO, STR_INDEX_ONE}, {}}},
+
+    // 内存分配
+    {"calloc", {PARAMS_NUMBER_TWO, {}, {}}},
+    {"malloc", {PARAMS_NUMBER_ONE, {}, {}}},
+    {"realloc", {PARAMS_NUMBER_TWO, {}, {{HEX_INDEX_ZERO, HEX_INDEX_SPECIAL_32}}}},
+    {"free", {PARAMS_NUMBER_ONE, {}, {{HEX_INDEX_ZERO, HEX_INDEX_SPECIAL_32}}}},
+    {"aligned_alloc", {PARAMS_NUMBER_TWO, {}, {}}},
+
+    // 内存映射
+    {"mmap", {PARAMS_NUMBER_SIX, {}, {}}},
+    {"mmap64", {PARAMS_NUMBER_SIX, {}, {}}},
+    {"mprotect", {PARAMS_NUMBER_THREE, {}, {}}},
+
+    // 动态链接
+    {"dlopen", {PARAMS_NUMBER_TWO, {STR_INDEX_ZERO}, {}}},
+    {"dlsym", {PARAMS_NUMBER_TWO, {STR_INDEX_ONE}, {}}},
+    {"dlclose", {PARAMS_NUMBER_ONE, {}, {}}},
+
+    // 系统相关
+    {"sysconf", {PARAMS_NUMBER_ONE, {}, {}}},
+    {"__system_property_get", {PARAMS_NUMBER_TWO, {STR_INDEX_ZERO, STR_INDEX_ONE}, {}}},
+    {"gettimeofday", {PARAMS_NUMBER_TWO, {}, {{HEX_INDEX_ZERO, HEX_INDEX_SPECIAL_32}}}},
+    {"srand48", {PARAMS_NUMBER_ONE, {}, {}}},
+    {"syscall", {PARAMS_NUMBER_ONE, {}, {}, FuncPrinter::syscall}},
+    {"arc4random_buf", {PARAMS_NUMBER_TWO, {}, {{HEX_INDEX_ZERO, HEX_INDEX_ONE}}}}
+};
+
+const std::unordered_map<std::string, AfterJniFuncConfig> after_jni_func_configs = {
+    {"FindClass", {PARAMS_NUMBER_TWO, {STR_INDEX_ONE}, {}, {}, {}, {}, {}}},
+    {"GetMethodID", {PARAMS_NUMBER_FOUR, {STR_INDEX_TWO, STR_INDEX_THREE}, {}, {}, {}, {}, {}}},
+    {"GetStaticMethodID", {PARAMS_NUMBER_FOUR, {STR_INDEX_TWO, STR_INDEX_THREE}, {}, {}, {}, {}, {}}},
+    {"NewString", {PARAMS_NUMBER_TWO, {}, {}, {}, {STR_INDEX_ZERO}, {}, {}}},
+    {"NewStringUTF", {PARAMS_NUMBER_TWO, {STR_INDEX_ONE}, {}, {}, {}, {}, {}}},
+    {"GetStringLength", {PARAMS_NUMBER_TWO, {}, {}, {STR_INDEX_ONE}, {}, {}, {}}},
+    {"GetStringUTFLength", {PARAMS_NUMBER_TWO, {}, {}, {STR_INDEX_ONE}, {}, {}, {}}},
+    {"GetStringChars", {PARAMS_NUMBER_THREE, {}, {}, {STR_INDEX_ONE}, {}, {}, {}}},
+    {"GetStringUTFChars", {PARAMS_NUMBER_THREE, {}, {}, {STR_INDEX_ONE}, {}, {}, {}}},
+    {"ReleaseStringUTFChars", {PARAMS_NUMBER_THREE, {STR_INDEX_TWO}, {}, {STR_INDEX_ONE}, {}, {}, {}}},
+    {"GetStringRegion", {PARAMS_NUMBER_FIVE, {}, {}, {STR_INDEX_ONE}, {}, {}, {}}},
+    {"GetStringUTFRegion", {PARAMS_NUMBER_FIVE, {}, {}, {STR_INDEX_ONE}, {}, {}, {}}},
+    {"GetStringCritical", {PARAMS_NUMBER_THREE, {}, {}, {STR_INDEX_ONE}, {}, {}, {}}},
+    {"ReleaseStringCritical", {PARAMS_NUMBER_THREE, {}, {}, {STR_INDEX_ONE}, {}, {}, {}}},
+    {"GetByteArrayRegion", {PARAMS_NUMBER_FIVE, {}, {}, {}, {}, {{HEX_INDEX_FOUR, HEX_INDEX_THREE}}, {}}},
+    {"SetByteArrayRegion", {PARAMS_NUMBER_FIVE, {}, {}, {}, {}, {{HEX_INDEX_FOUR, HEX_INDEX_THREE}}, {}}},
+    {"GetByteArrayElements", {PARAMS_NUMBER_THREE, {}, {}, {}, {}, {}, {{HEX_INDEX_ZERO, HEX_INDEX_SPECIAL_32}}}},
+};
 
 void FuncPrinter::params_join(FUNC_CONTEXT *func_context, uint count) {
     func_context->info[func_context->info_n++] = '(';
@@ -91,7 +182,7 @@ void FuncPrinter::read_string(int& buff_n, char *buff, char* str, size_t max_len
     }
 
     size_t i = 0;
-    while (i < max_len && str[i]) {
+    while (i < max_len && buff_n < BUFFER_SIZE - 1 && str[i]) {
         buff[buff_n++] = str[i++];
     }
 }
@@ -106,9 +197,7 @@ void FuncPrinter::hexdump(int& buff_n, char *buff, uint64_t address, size_t coun
 
     auto bytePtr = (char*)(address);
     if (count == 0) {
-        int i = 0;
-        while (bytePtr[i++]);
-        count = i - 1;
+        count = strnlen(bytePtr, 4096);
     }
 
     size_t offset = 0;
@@ -137,6 +226,7 @@ void FuncPrinter::hexdump(int& buff_n, char *buff, uint64_t address, size_t coun
             }
         }
         ascii[ascii_n++] = '|';
+        ascii[ascii_n] = '\0';
 
         Utils::auto_snprintf(buff_n, buff, "%s", ascii);
 
@@ -175,7 +265,7 @@ void FuncPrinter::before(FUNC_CONTEXT *func_context) {
 
     std::string func_name_str = func_context->name;
 
-    if (func_name_str == "objc_storeStr ong") {
+    if (func_name_str == "objc_storeStrong") {
         params_number = 2;
         uint64_t isa = 0;
         get_obj_isa_address(&isa, func_context->cpu_context.x[0], sizeof(isa));
@@ -365,21 +455,17 @@ void FuncPrinter::jni_after(FUNC_CONTEXT *func_context, GumCpuContext *curr_cpu_
         }
     }
 
-    for (const auto &method_name: call_jni_methods) {
-        if (strcmp(method_name.c_str(), func_context->name) == 0) {
+    if (call_jni_methods.count(func_context->name) > 0) {
+        if (instance->jni_classes.count(func_context->cpu_context.x[1]) > 0) {
+             Utils::auto_snprintf(func_context->info_n, func_context->info, "\njclass: %s", instance->jni_classes[func_context->cpu_context.x[1]].c_str());
+        }
 
-            if (instance->jni_classes.count(func_context->cpu_context.x[1]) > 0) {
-                 Utils::auto_snprintf(func_context->info_n, func_context->info, "\njclass: %s", instance->jni_classes[func_context->cpu_context.x[1]].c_str());
+        if (instance->jni_methods.count(func_context->cpu_context.x[2]) > 0) {
+            Utils::auto_snprintf(func_context->info_n, func_context->info, "\njmethod: %s", instance->jni_methods[func_context->cpu_context.x[2]].c_str());
+
+            if (instance->jni_methods_classes.count(func_context->cpu_context.x[2]) > 0) {
+                 Utils::auto_snprintf(func_context->info_n, func_context->info, "\njclass: %s", instance->jni_methods_classes[func_context->cpu_context.x[2]].c_str());
             }
-
-            if (instance->jni_methods.count(func_context->cpu_context.x[2]) > 0) {
-                Utils::auto_snprintf(func_context->info_n, func_context->info, "\njmethod: %s", instance->jni_methods[func_context->cpu_context.x[2]].c_str());
-
-                if (instance->jni_methods_classes.count(func_context->cpu_context.x[2]) > 0) {
-                     Utils::auto_snprintf(func_context->info_n, func_context->info, "\njclass: %s", instance->jni_methods_classes[func_context->cpu_context.x[2]].c_str());
-                }
-            }
-            break;
         }
     }
 

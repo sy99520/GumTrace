@@ -12,6 +12,7 @@ bool TaintEngine::any_src_tainted(const TraceLine& line) const {
         if (is_reg_tainted(line.src_regs[i])) return true;
     }
     if (line.has_mem_read && tainted_mem_.count(line.mem_read_addr)) return true;
+    if (line.has_mem_read2 && tainted_mem_.count(line.mem_read_addr2)) return true;
     return false;
 }
 
@@ -20,6 +21,7 @@ bool TaintEngine::any_dst_tainted(const TraceLine& line) const {
         if (is_reg_tainted(line.dst_regs[i])) return true;
     }
     if (line.has_mem_write && tainted_mem_.count(line.mem_write_addr)) return true;
+    if (line.has_mem_write2 && tainted_mem_.count(line.mem_write_addr2)) return true;
     return false;
 }
 
@@ -33,6 +35,7 @@ void TaintEngine::set_source(const TaintSource& source) {
     tainted_reg_count_ = 0;
     tainted_mem_.clear();
     results_.clear();
+    stop_reason_ = StopReason::END_OF_TRACE;
 
     if (source.is_mem) {
         tainted_mem_.insert(source.mem_addr);
@@ -86,10 +89,20 @@ void TaintEngine::propagate_forward(const TraceLine& line) {
             break;
         }
         case InsnCategory::LOAD: {
-            bool mem_t = line.has_mem_read && tainted_mem_.count(line.mem_read_addr);
-            for (int i = 0; i < line.num_dst; i++) {
-                if (mem_t) taint_reg(line.dst_regs[i]);
-                else untaint_reg(line.dst_regs[i]);
+            // LDP 双读：分别检查两个内存地址
+            if (line.has_mem_read2 && line.num_dst >= 2) {
+                bool mem_t1 = line.has_mem_read && tainted_mem_.count(line.mem_read_addr);
+                bool mem_t2 = tainted_mem_.count(line.mem_read_addr2);
+                if (mem_t1) taint_reg(line.dst_regs[0]);
+                else untaint_reg(line.dst_regs[0]);
+                if (mem_t2) taint_reg(line.dst_regs[1]);
+                else untaint_reg(line.dst_regs[1]);
+            } else {
+                bool mem_t = line.has_mem_read && tainted_mem_.count(line.mem_read_addr);
+                for (int i = 0; i < line.num_dst; i++) {
+                    if (mem_t) taint_reg(line.dst_regs[i]);
+                    else untaint_reg(line.dst_regs[i]);
+                }
             }
             break;
         }
@@ -104,10 +117,8 @@ void TaintEngine::propagate_forward(const TraceLine& line) {
                     if (is_reg_tainted(line.src_regs[1])) tainted_mem_.insert(line.mem_write_addr2);
                     else tainted_mem_.erase(line.mem_write_addr2);
                 } else {
-                    bool src_t = false;
-                    for (int i = 0; i < line.num_src; i++) {
-                        if (is_reg_tainted(line.src_regs[i])) { src_t = true; break; }
-                    }
+                    // 非 STP：只检查数据寄存器（src_regs[0]），不检查基址/索引寄存器
+                    bool src_t = (line.num_src > 0 && is_reg_tainted(line.src_regs[0]));
                     if (src_t) tainted_mem_.insert(line.mem_write_addr);
                     else tainted_mem_.erase(line.mem_write_addr);
                 }
@@ -124,9 +135,13 @@ void TaintEngine::propagate_forward(const TraceLine& line) {
             break;
         case InsnCategory::OTHER: {
             bool src_t = any_src_tainted(line);
-            if (src_t) {
-                for (int i = 0; i < line.num_dst; i++) taint_reg(line.dst_regs[i]);
-                if (line.has_mem_write) tainted_mem_.insert(line.mem_write_addr);
+            for (int i = 0; i < line.num_dst; i++) {
+                if (src_t) taint_reg(line.dst_regs[i]);
+                else untaint_reg(line.dst_regs[i]);
+            }
+            if (line.has_mem_write) {
+                if (src_t) tainted_mem_.insert(line.mem_write_addr);
+                else tainted_mem_.erase(line.mem_write_addr);
             }
             break;
         }
@@ -164,11 +179,25 @@ void TaintEngine::propagate_backward(const TraceLine& line) {
             break;
         }
         case InsnCategory::LOAD: {
-            bool dst_t = false;
-            for (int i = 0; i < line.num_dst; i++) {
-                if (is_reg_tainted(line.dst_regs[i])) { dst_t = true; untaint_reg(line.dst_regs[i]); }
+            // LDP 双读反向传播
+            if (line.has_mem_read2 && line.num_dst >= 2) {
+                bool t0 = is_reg_tainted(line.dst_regs[0]);
+                bool t1 = is_reg_tainted(line.dst_regs[1]);
+                if (t0) {
+                    untaint_reg(line.dst_regs[0]);
+                    if (line.has_mem_read) tainted_mem_.insert(line.mem_read_addr);
+                }
+                if (t1) {
+                    untaint_reg(line.dst_regs[1]);
+                    tainted_mem_.insert(line.mem_read_addr2);
+                }
+            } else {
+                bool dst_t = false;
+                for (int i = 0; i < line.num_dst; i++) {
+                    if (is_reg_tainted(line.dst_regs[i])) { dst_t = true; untaint_reg(line.dst_regs[i]); }
+                }
+                if (dst_t && line.has_mem_read) tainted_mem_.insert(line.mem_read_addr);
             }
-            if (dst_t && line.has_mem_read) tainted_mem_.insert(line.mem_read_addr);
             break;
         }
         case InsnCategory::STORE: {
@@ -217,30 +246,50 @@ void TaintEngine::propagate_backward(const TraceLine& line) {
 
 void TaintEngine::run(const std::vector<TraceLine>& lines, int start_index) {
     results_.clear();
+    stop_reason_ = StopReason::END_OF_TRACE;
 
     if (mode_ == TrackMode::FORWARD) {
         // 起始行记录
         record(start_index);
 
+        int lines_since_last_propagation = 0;
+
         for (int i = start_index + 1; i < (int)lines.size(); i++) {
             const auto& line = lines[i];
+
+            // 检查源是否有污点（传播事件）
             bool involved = any_src_tainted(line);
-            if (!involved && line.has_mem_write) {
-                for (int j = 0; j < line.num_src; j++) {
-                    if (is_reg_tainted(line.src_regs[j])) { involved = true; break; }
-                }
-            }
+
+            // 检查是否覆盖了已被污染的内存（消亡事件）
+            if (!involved && line.has_mem_write && tainted_mem_.count(line.mem_write_addr))
+                involved = true;
+            if (!involved && line.has_mem_write2 && tainted_mem_.count(line.mem_write_addr2))
+                involved = true;
 
             propagate_forward(line);
 
-            if (involved) record(i);
+            if (involved) {
+                record(i);
+                lines_since_last_propagation = 0;
+            } else {
+                lines_since_last_propagation++;
+                if (lines_since_last_propagation >= max_scan_distance_) {
+                    stop_reason_ = StopReason::SCAN_LIMIT_REACHED;
+                    break;
+                }
+            }
 
-            if (count_tainted_regs() == 0 && tainted_mem_.empty()) break;
+            if (count_tainted_regs() == 0 && tainted_mem_.empty()) {
+                stop_reason_ = StopReason::ALL_TAINT_CLEARED;
+                break;
+            }
         }
     } else {
         // 起始行：执行反向传播
         propagate_backward(lines[start_index]);
         record(start_index);
+
+        int lines_since_last_propagation = 0;
 
         for (int i = start_index - 1; i >= 0; i--) {
             const auto& line = lines[i];
@@ -255,9 +304,19 @@ void TaintEngine::run(const std::vector<TraceLine>& lines, int start_index) {
             if (involved) {
                 propagate_backward(line);
                 record(i);
+                lines_since_last_propagation = 0;
+            } else {
+                lines_since_last_propagation++;
+                if (lines_since_last_propagation >= max_scan_distance_) {
+                    stop_reason_ = StopReason::SCAN_LIMIT_REACHED;
+                    break;
+                }
             }
 
-            if (count_tainted_regs() == 0 && tainted_mem_.empty()) break;
+            if (count_tainted_regs() == 0 && tainted_mem_.empty()) {
+                stop_reason_ = StopReason::ALL_TAINT_CLEARED;
+                break;
+            }
         }
 
         std::reverse(results_.begin(), results_.end());
@@ -288,6 +347,20 @@ bool TaintEngine::write_result(const std::string& output_path, const TraceParser
     else
         fprintf(out, "%s", TraceParser::reg_name(source_.reg));
     fprintf(out, "\nTotal matched: %zu instructions\n", results_.size());
+
+    // 停止原因
+    switch (stop_reason_) {
+        case StopReason::ALL_TAINT_CLEARED:
+            fprintf(out, "Stop reason: all taint cleared\n");
+            break;
+        case StopReason::SCAN_LIMIT_REACHED:
+            fprintf(out, "Stop reason: scan limit reached (%d lines without propagation)\n", max_scan_distance_);
+            break;
+        case StopReason::END_OF_TRACE:
+            fprintf(out, "Stop reason: end of trace\n");
+            break;
+    }
+
     fprintf(out, "============================================================\n\n");
 
     char line_buf[4096];

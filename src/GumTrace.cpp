@@ -65,7 +65,6 @@ void GumTrace::callout_callback(GumCpuContext *cpu_context, gpointer user_data) 
         buff_n = 0;
     }
 
-    std::stringstream write_reg_value_info;
     if (self->write_reg_list.num > 0) {
         for (int i = 0; i < self->write_reg_list.num; i++) {
             __uint128_t reg_value = 0;
@@ -142,7 +141,9 @@ void GumTrace::callout_callback(GumCpuContext *cpu_context, gpointer user_data) 
                 Utils::append_char(buff, buff_n, ' ');
             }
             is_write = true;
-            self->write_reg_list.regs[self->write_reg_list.num++] = op.reg;
+            if (self->write_reg_list.num < 31) {
+                self->write_reg_list.regs[self->write_reg_list.num++] = op.reg;
+            }
         } else if (op.access & CS_AC_READ && op.type == ARM64_OP_REG) {
             if (Utils::get_register_value(op.reg, cpu_context, reg_value)) {
                 if (is_first_print) {
@@ -233,7 +234,9 @@ void GumTrace::callout_callback(GumCpuContext *cpu_context, gpointer user_data) 
             }
 
             is_write = true;
-            self->write_reg_list.regs[self->write_reg_list.num++] = op.reg;
+            if (self->write_reg_list.num < 31) {
+                self->write_reg_list.regs[self->write_reg_list.num++] = op.reg;
+            }
         }
     }
 
@@ -242,9 +245,10 @@ void GumTrace::callout_callback(GumCpuContext *cpu_context, gpointer user_data) 
     }
 
     if (callback_ctx->instruction.id == ARM64_INS_SVC) {
-        std::string svc_name = self->svc_func_maps[cpu_context->x[8]];
+        auto svc_it = self->svc_func_maps.find(cpu_context->x[8]);
+        if (svc_it == self->svc_func_maps.end()) goto skip_call;
         self->last_func_context.info_n = 0;
-        self->last_func_context.name = svc_name.c_str();
+        self->last_func_context.name = svc_it->second.c_str();
         memcpy(&self->last_func_context.cpu_context, cpu_context, sizeof(GumCpuContext));
         self->last_func_context.call = true;
 
@@ -291,26 +295,27 @@ void GumTrace::callout_callback(GumCpuContext *cpu_context, gpointer user_data) 
         }
     }
 
-    self->trace_flash++;
+    skip_call:
+    self->trace_flush++;
     if (self->options & _GUM_OPTIONS_DEBUG) {
-        if (self->trace_flash > 20) {
+        if (self->trace_flush > 20) {
             if (buff_n > 0) {
                 self->trace_file.write(buff, buff_n);
                 buff_n = 0;
             }
 
             self->trace_file.flush();
-            self->trace_flash = 0;
+            self->trace_flush = 0;
         }
     } else {
-        if (self->trace_flash > 100000) {
+        if (self->trace_flush > 100000) {
             if (buff_n > 0) {
                 self->trace_file.write(buff, buff_n);
                 buff_n = 0;
             }
 
             self->trace_file.flush();
-            self->trace_flash = 0;
+            self->trace_flush = 0;
         }
     }
 }
@@ -328,10 +333,10 @@ void GumTrace::transform_callback(GumStalkerIterator *iterator, GumStalkerOutput
         }
 
         if (Utils::is_lse(p_insn) == false) {
-            auto module = self->get_module_by_name(*module_name_ptr);
+            const auto& module = self->get_module_by_name(*module_name_ptr);
 
             auto callback_ctx = self->callback_context_instance->pull(p_insn, gum_stalker_iterator_get_capstone(it),
-                                                                      module_name_ptr->c_str(), module["base"]);
+                                                                      module_name_ptr->c_str(), module.at("base"));
 
             gum_stalker_iterator_put_callout(it, callout_callback, callback_ctx, nullptr);
         }
@@ -350,7 +355,7 @@ const std::string *GumTrace::in_range_module(size_t address) {
         size_t base = module_map.at("base");
         size_t size = module_map.at("size");
         size_t end = base + size;
-        if (address >= base && address <= end) {
+        if (address >= base && address < end) {
             last_module_cache.name = &pair.first;
             last_module_cache.base = base;
             last_module_cache.end = end;
@@ -360,7 +365,7 @@ const std::string *GumTrace::in_range_module(size_t address) {
     return nullptr;
 }
 
-std::map<std::string, std::size_t> GumTrace::get_module_by_name(const std::string &module_name) {
+const std::map<std::string, std::size_t>& GumTrace::get_module_by_name(const std::string &module_name) {
     return modules[module_name];
 }
 
@@ -372,11 +377,12 @@ void GumTrace::follow() {
 
 
 void GumTrace::unfollow() {
+    trace_thread_id > 0 ? gum_stalker_unfollow(_stalker, trace_thread_id) : gum_stalker_unfollow_me(_stalker);
+
     if (trace_file.is_open()) {
         trace_file.write(buffer, buffer_offset);
+        buffer_offset = 0;
         trace_file.flush();
         trace_file.close();
     }
-
-    trace_thread_id > 0 ? gum_stalker_unfollow(_stalker, trace_thread_id) : gum_stalker_unfollow_me(_stalker);
 }

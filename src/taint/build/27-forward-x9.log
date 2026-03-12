@@ -1,0 +1,56 @@
+=== Taint Forward Tracking ===
+Source: x9
+Total matched: 17 instructions
+============================================================
+
+[27] [libsscronet.so] 0x7a39cee55c!0x2ed55c ldr x9, [sp, #8]; x9=0x0 sp=0x798484e220 mem_r=0x798484e228 -> x9=0x31a69823 
+      tainted: {x9}
+
+[31] [libsscronet.so] 0x7a39cee56c!0x2ed56c smulh x9, x9, x10; x9=0x31a69823 x9=0x31a69823 x10=0x20c49ba5e353f7cf -> x9=0x65af4c0 
+      tainted: {x9}
+
+[32] [libsscronet.so] 0x7a39cee570!0x2ed570 asr x10, x9, #7; x10=0x20c49ba5e353f7cf x9=0x65af4c0 -> x10=0xcb5e9 
+      tainted: {x9, x10}
+
+[33] [libsscronet.so] 0x7a39cee574!0x2ed574 add x9, x10, x9, lsr #63; x9=0x65af4c0 x10=0xcb5e9 x9=0x65af4c0 -> x9=0xcb5e9 
+      tainted: {x9, x10}
+
+[34] [libsscronet.so] 0x7a39cee578!0x2ed578 adds x0, x8, x9; x0=0x0 x8=0x13fed8ce00 x9=0xcb5e9 -> x0=0x13fee583e9 
+      tainted: {x0, x9, x10, nzcv}
+
+[40] [libsscronet.so] 0x7a39df51b0!0x3f41b0 str x0, [x19, #0x238]; x0=0x13fee583e9 x19=0x7cf8b734f0 mem_w=0x7cf8b73728 
+      tainted: {x0, x9, x10, nzcv, mem:0x7cf8b73728}
+
+[115824] [libsscronet.so] 0x7a39df5160!0x3f4160 ldr x8, [x0, #0x238]; x8=0x7a39df515c x0=0x7cf8b734f0 mem_r=0x7cf8b73728 -> x8=0x13fee583e9 
+      tainted: {x8, mem:0x7cf8b73728}
+
+[115825] [libsscronet.so] 0x7a39df5164!0x3f4164 str x8, [x1, #0x1b8]; x8=0x13fee583e9 x1=0x7c08cfb590 mem_w=0x7c08cfb748 
+      tainted: {x8, mem:0x7c08cfb748, mem:0x7cf8b73728}
+
+[115826] [libsscronet.so] 0x7a39df5168!0x3f4168 ldr x8, [x0, #0x238]; x8=0x13fee583e9 x0=0x7cf8b734f0 mem_r=0x7cf8b73728 -> x8=0x13fee583e9 
+      tainted: {x8, mem:0x7c08cfb748, mem:0x7cf8b73728}
+
+[115827] [libsscronet.so] 0x7a39df516c!0x3f416c str x8, [x1, #0x1c0]; x8=0x13fee583e9 x1=0x7c08cfb590 mem_w=0x7c08cfb750 
+      tainted: {x8, mem:0x7c08cfb748, mem:0x7c08cfb750, mem:0x7cf8b73728}
+
+[115828] [libsscronet.so] 0x7a39df5170!0x3f4170 ldr x8, [x0, #0x238]; x8=0x13fee583e9 x0=0x7cf8b734f0 mem_r=0x7cf8b73728 -> x8=0x13fee583e9 
+      tainted: {x8, mem:0x7c08cfb748, mem:0x7c08cfb750, mem:0x7cf8b73728}
+
+[115829] [libsscronet.so] 0x7a39df5174!0x3f4174 str x8, [x1, #0x1c8]; x8=0x13fee583e9 x1=0x7c08cfb590 mem_w=0x7c08cfb758 
+      tainted: {x8, mem:0x7c08cfb748, mem:0x7c08cfb750, mem:0x7c08cfb758, mem:0x7cf8b73728}
+
+[115830] [libsscronet.so] 0x7a39df5178!0x3f4178 ldr x8, [x0, #0x238]; x8=0x13fee583e9 x0=0x7cf8b734f0 mem_r=0x7cf8b73728 -> x8=0x13fee583e9 
+      tainted: {x8, mem:0x7c08cfb748, mem:0x7c08cfb750, mem:0x7c08cfb758, mem:0x7cf8b73728}
+
+[115831] [libsscronet.so] 0x7a39df517c!0x3f417c str x8, [x1, #0x1d0]; x8=0x13fee583e9 x1=0x7c08cfb590 mem_w=0x7c08cfb760 
+      tainted: {x8, mem:0x7c08cfb748, mem:0x7c08cfb750, mem:0x7c08cfb758, mem:0x7c08cfb760, mem:0x7cf8b73728}
+
+[115906] [libsscronet.so] 0x7a39df3794!0x3f2794 ldr x9, [x21, #0x988]; x9=0x13fed33ef7 x21=0x7c08cfadd0 mem_r=0x7c08cfb758 -> x9=0x13fee583e9 
+      tainted: {x9, mem:0x7c08cfb748, mem:0x7c08cfb750, mem:0x7c08cfb758, mem:0x7c08cfb760, mem:0x7cf8b73728}
+
+[115907] [libsscronet.so] 0x7a39df3798!0x3f2798 cbz x9, #0x7a39df37a8; x9=0x13fee583e9 
+      tainted: {x9, mem:0x7c08cfb748, mem:0x7c08cfb750, mem:0x7c08cfb758, mem:0x7c08cfb760, mem:0x7cf8b73728}
+
+[115908] [libsscronet.so] 0x7a39df379c!0x3f279c cmp x9, x8; x9=0x13fee583e9 x8=0x13fed33ef7 -> x9=0x13fee583e9 
+      tainted: {x9, nzcv, mem:0x7c08cfb748, mem:0x7c08cfb750, mem:0x7c08cfb758, mem:0x7c08cfb760, mem:0x7cf8b73728}
+

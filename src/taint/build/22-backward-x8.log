@@ -1,0 +1,17 @@
+=== Taint Backward Tracking ===
+Source: x8
+Total matched: 4 instructions
+============================================================
+
+[19] [libsscronet.so] 0x7a39cee53c!0x2ed53c ldr x9, [sp]; x9=0x14f78 sp=0x798484e220 mem_r=0x798484e220 -> x9=0x14f78 
+      tainted: {mem:0x798484e220}
+
+[20] [libsscronet.so] 0x7a39cee540!0x2ed540 mov w10, #0x4240; w10=0x14f78 -> w10=0x4240 
+      tainted: {x9}
+
+[21] [libsscronet.so] 0x7a39cee544!0x2ed544 movk w10, #0xf, lsl #16; w10=0x4240 -> w10=0xf4240 
+      tainted: {x9, x10}
+
+[22] [libsscronet.so] 0x7a39cee548!0x2ed548 mul x8, x9, x10; x8=0x31a69823 x9=0x14f78 x10=0xf4240 -> x8=0x13fed8ce00 
+      tainted: {x9, x10}
+

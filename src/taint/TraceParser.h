@@ -64,10 +64,12 @@ struct TraceLine {
     uint64_t mem_read_addr = 0;
     uint64_t mem_write_addr = 0;
     uint64_t mem_write_addr2 = 0;   // STP 第二个写地址
+    uint64_t mem_read_addr2 = 0;   // LDP 第二个读地址
     uint64_t rel_addr = 0;
     bool has_mem_read = false;
     bool has_mem_write = false;
     bool has_mem_write2 = false;    // STP 双写
+    bool has_mem_read2 = false;     // LDP 双读
     bool sets_flags = false;        // adds, subs, ands 等隐式写 NZCV
 
     // 文件偏移，用于输出时回读原始行
@@ -83,12 +85,16 @@ public:
     // 流式加载：只加载 [0, max_line] 范围的指令（用于反向追踪节省内存）
     bool load_range(const std::string& filepath, int max_line);
 
+    // 流式加载：只加载 [0, max_offset] 字节范围的指令（用于反向追踪，按字节偏移截止）
+    bool load_range_by_offset(const std::string& filepath, long max_offset);
+
     const std::vector<TraceLine>& get_lines() const { return lines_; }
     size_t size() const { return lines_.size(); }
     const std::string& get_filepath() const { return filepath_; }
 
     int find_by_rel_addr(uint64_t rel_addr) const;
     int find_by_line(int line_number) const;
+    int find_by_offset(long byte_offset) const;
 
     // 根据文件偏移读取原始行内容（用于输出）
     std::string read_raw_line(const TraceLine& tl) const;

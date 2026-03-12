@@ -13,6 +13,7 @@ static void print_usage(const char* prog) {
     fprintf(stderr, "  -f <target>     Forward tracking (from source)\n");
     fprintf(stderr, "  -b <target>     Backward tracking (to target)\n");
     fprintf(stderr, "  -l <line>       Start line number in trace file\n");
+    fprintf(stderr, "  -p <offset>     Start by byte offset in trace file\n");
     fprintf(stderr, "  -a <addr>       Start by relative address (hex, e.g. 0x1890)\n");
     fprintf(stderr, "  -h              Show this help\n\n");
     fprintf(stderr, "Target format:\n");
@@ -47,8 +48,10 @@ int main(int argc, char* argv[]) {
     const char* target = nullptr;
     TrackMode mode = TrackMode::FORWARD;
     int start_line = -1;
+    long start_offset = -1;
     uint64_t start_addr = 0;
     bool use_addr = false;
+    bool use_offset = false;
     bool has_mode = false;
 
     for (int i = 1; i < argc; i++) {
@@ -66,6 +69,9 @@ int main(int argc, char* argv[]) {
             has_mode = true;
         } else if (strcmp(argv[i], "-l") == 0 && i + 1 < argc) {
             start_line = atoi(argv[++i]);
+        } else if (strcmp(argv[i], "-p") == 0 && i + 1 < argc) {
+            start_offset = atol(argv[++i]);
+            use_offset = true;
         } else if (strcmp(argv[i], "-a") == 0 && i + 1 < argc) {
             const char* addr = argv[++i];
             if (addr[0] == '0' && (addr[1] == 'x' || addr[1] == 'X')) addr += 2;
@@ -86,14 +92,41 @@ int main(int argc, char* argv[]) {
         print_usage(argv[0]);
         return 1;
     }
-    if (start_line < 0 && !use_addr) {
-        fprintf(stderr, "Error: -l or -a is required\n");
+    if (start_line < 0 && !use_addr && !use_offset) {
+        fprintf(stderr, "Error: -l, -p, or -a is required\n");
         print_usage(argv[0]);
         return 1;
     }
 
     TaintSource source = parse_target(target);
     if (!source.is_mem && source.reg == REG_INVALID) return 1;
+
+    // -p：将字节偏移转换为行号，然后复用 -l 的代码路径
+    if (use_offset && start_line < 0) {
+        FILE* fp = fopen(input_file, "rb");
+        if (!fp) {
+            fprintf(stderr, "Error: cannot open file: %s\n", input_file);
+            return 1;
+        }
+        int line_num = 1;
+        static const int SCAN_BUF = 262144;  // 256KB
+        char* scan_buf = new char[SCAN_BUF];
+        long scanned = 0;
+        while (scanned < start_offset) {
+            long remaining = start_offset - scanned;
+            int to_read = (remaining < SCAN_BUF) ? (int)remaining : SCAN_BUF;
+            int n = (int)fread(scan_buf, 1, to_read, fp);
+            if (n <= 0) break;
+            for (int j = 0; j < n; j++) {
+                if (scan_buf[j] == '\n') line_num++;
+            }
+            scanned += n;
+        }
+        delete[] scan_buf;
+        fclose(fp);
+        start_line = line_num;
+        fprintf(stderr, "Converted byte offset %ld -> line %d\n", start_offset, start_line);
+    }
 
     auto t0 = std::chrono::steady_clock::now();
 

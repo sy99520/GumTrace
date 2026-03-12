@@ -1,0 +1,1029 @@
+=== Taint Backward Tracking ===
+Source: x12
+Total matched: 341 instructions
+Stop reason: scan limit reached (1000000 lines without propagation)
+============================================================
+
+[1702098] [libmetasec_ov.so] 0x7984312d1c!0x106d1c ldp x29, x30, [sp], #0x10; fp=0x7984848b70 lr=0x7984312d1c sp=0x7984848b70 mem_w=0x7984848b70 -> fp=0x7984848f30 lr=0x7984312978 
+      tainted: {mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1702106] [libmetasec_ov.so] 0x798434f2b0!0x1432b0 stp x29, x30, [sp, #0x20]; fp=0x7984848f30 lr=0x7984312988 sp=0x7984848b50 mem_w=0x7984848b70 
+      tainted: {fp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1702160] [libmetasec_ov.so] 0x798434f314!0x143314 ldp x29, x30, [sp, #0x20]; fp=0x7984848b70 lr=0x798434f300 sp=0x7984848b50 mem_r=0x7984848b70 -> fp=0x7984848f30 lr=0x7984312988 
+      tainted: {mem:0x798439520a, mem:0x7984395d6f, mem:0x7984395a49, mem:0x798439565f, mem:0x7984848b70}
+
+[1702175] [libmetasec_ov.so] 0x7984312d90!0x106d90 stp x29, x30, [sp, #0x30]; fp=0x7984848f30 lr=0x79843129a8 sp=0x7984848b40 mem_w=0x7984848b70 
+      tainted: {fp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1713859] [libmetasec_ov.so] 0x7984312e38!0x106e38 ldp x29, x30, [sp, #0x30]; fp=0x7984848b70 lr=0x7984312de0 sp=0x7984848b40 mem_r=0x7984848b70 -> fp=0x7984848f30 lr=0x79843129a8 
+      tainted: {mem:0x798439520a, mem:0x7984395d6f, mem:0x7984395a49, mem:0x798439565f, mem:0x7984848b70}
+
+[1713887] [libmetasec_ov.so] 0x798434f2b0!0x1432b0 stp x29, x30, [sp, #0x20]; fp=0x7984848f30 lr=0x7984312a6c sp=0x7984848b50 mem_w=0x7984848b70 
+      tainted: {fp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1713941] [libmetasec_ov.so] 0x798434f314!0x143314 ldp x29, x30, [sp, #0x20]; fp=0x7984848b70 lr=0x798434f300 sp=0x7984848b50 mem_r=0x7984848b70 -> fp=0x7984848f30 lr=0x7984312a6c 
+      tainted: {mem:0x798439520a, mem:0x7984395d6f, mem:0x7984395a49, mem:0x798439565f, mem:0x7984848b70}
+
+[1713950] [libmetasec_ov.so] 0x798434f870!0x143870 stp x29, x30, [sp, #0x10]; fp=0x7984848f30 lr=0x7984312a7c sp=0x7984848b60 mem_w=0x7984848b70 
+      tainted: {fp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1713975] [libmetasec_ov.so] 0x798434f8b4!0x1438b4 ldp x29, x30, [sp, #0x10]; fp=0x7984848b70 lr=0x798434f894 sp=0x7984848b60 mem_r=0x7984848b70 -> fp=0x7984848f30 lr=0x7984312a7c 
+      tainted: {mem:0x798439520a, mem:0x7984395d6f, mem:0x7984395a49, mem:0x798439565f, mem:0x7984848b70}
+
+[1713982] [libmetasec_ov.so] 0x798434f608!0x143608 stp x29, x30, [sp, #0x10]; fp=0x7984848f30 lr=0x7984312a84 sp=0x7984848b60 mem_w=0x7984848b70 
+      tainted: {fp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1713990] [libmetasec_ov.so] 0x798434f630!0x143630 ldp x29, x30, [sp, #0x10]; fp=0x7984848b70 lr=0x7984312a84 sp=0x7984848b60 mem_r=0x7984848b70 -> fp=0x7984848f30 lr=0x7984312a84 
+      tainted: {mem:0x798439520a, mem:0x7984395d6f, mem:0x7984395a49, mem:0x798439565f, mem:0x7984848b70}
+
+[1714021] [libmetasec_ov.so] 0x798434f608!0x143608 stp x29, x30, [sp, #0x10]; fp=0x7984848f30 lr=0x7984312b24 sp=0x7984848b60 mem_w=0x7984848b70 
+      tainted: {fp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1714054] [libmetasec_ov.so] 0x798434f630!0x143630 ldp x29, x30, [sp, #0x10]; fp=0x7984848b70 lr=0x798434f620 sp=0x7984848b60 mem_r=0x7984848b70 -> fp=0x7984848f30 lr=0x7984312b24 
+      tainted: {mem:0x798439520a, mem:0x7984395d6f, mem:0x7984395a49, mem:0x798439565f, mem:0x7984848b70}
+
+[1714076] [libmetasec_ov.so] 0x798434f608!0x143608 stp x29, x30, [sp, #0x10]; fp=0x7984848f30 lr=0x7984312bd4 sp=0x7984848b60 mem_w=0x7984848b70 
+      tainted: {fp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1714094] [libmetasec_ov.so] 0x798434f630!0x143630 ldp x29, x30, [sp, #0x10]; fp=0x7984848b70 lr=0x798434f620 sp=0x7984848b60 mem_r=0x7984848b70 -> fp=0x7984848f30 lr=0x7984312bd4 
+      tainted: {mem:0x798439520a, mem:0x7984395d6f, mem:0x7984395a49, mem:0x798439565f, mem:0x7984848b70}
+
+[1714143] [libmetasec_ov.so] 0x7984312cb4!0x106cb4 sub sp, x29, #0x50; sp=0x7984848b80 fp=0x7984848f30 -> sp=0x7984848ee0 
+      tainted: {fp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1714182] [libmetasec_ov.so] 0x798431c8e0!0x1108e0 add sp, sp, #0x50; sp=0x7984848f40 sp=0x7984848f40 -> sp=0x7984848f90 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1724388] [libmetasec_ov.so] 0x798431c8ec!0x1108ec sub sp, sp, #0x60; sp=0x7984848f90 sp=0x7984848f90 -> sp=0x7984848f30 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1724857] [libmetasec_ov.so] 0x798430ffd4!0x103fd4 sub sp, sp, #0x60; sp=0x7984848f30 sp=0x7984848f30 -> sp=0x7984848ed0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1724892] [libmetasec_ov.so] 0x798435c21c!0x15021c sub sp, sp, #0x90; sp=0x7984848ed0 sp=0x7984848ed0 -> sp=0x7984848e40 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1724951] [libmetasec_ov.so] 0x798435c12c!0x15012c sub sp, sp, #0x40; sp=0x7984848e40 sp=0x7984848e40 -> sp=0x7984848e00 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1726989] [libmetasec_ov.so] 0x798435afe8!0x14efe8 sub sp, sp, #0x120; sp=0x7984848dc0 sp=0x7984848dc0 -> sp=0x7984848ca0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1728092] [libmetasec_ov.so] 0x798435c124!0x150124 add sp, sp, #0x120; sp=0x7984848ca0 sp=0x7984848ca0 -> sp=0x7984848dc0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1728324] [libmetasec_ov.so] 0x798435c210!0x150210 add sp, sp, #0x40; sp=0x7984848e00 sp=0x7984848e00 -> sp=0x7984848e40 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1728332] [libmetasec_ov.so] 0x798435c28c!0x15028c add sp, sp, #0x90; sp=0x7984848e40 sp=0x7984848e40 -> sp=0x7984848ed0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1728405] [libmetasec_ov.so] 0x7984310090!0x104090 sub sp, sp, #0x10; sp=0x7984848ed0 sp=0x7984848ed0 -> sp=0x7984848ec0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1728411] [libmetasec_ov.so] 0x79843100ac!0x1040ac add sp, sp, #0x10; sp=0x7984848ec0 sp=0x7984848ec0 -> sp=0x7984848ed0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1728412] [libmetasec_ov.so] 0x79843100b0!0x1040b0 sub sp, sp, #0x10; sp=0x7984848ed0 sp=0x7984848ed0 -> sp=0x7984848ec0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1728418] [libmetasec_ov.so] 0x79843100cc!0x1040cc add sp, sp, #0x10; sp=0x7984848ec0 sp=0x7984848ec0 -> sp=0x7984848ed0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1728426] [libmetasec_ov.so] 0x79843100ec!0x1040ec add sp, sp, #0x60; sp=0x7984848ed0 sp=0x7984848ed0 -> sp=0x7984848f30 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1728459] [libmetasec_ov.so] 0x798431c9a4!0x1109a4 add sp, sp, #0x60; sp=0x7984848f30 sp=0x7984848f30 -> sp=0x7984848f90 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1733867] [libmetasec_ov.so] 0x7984310e7c!0x104e7c sub sp, sp, #0x70; sp=0x7984848f90 sp=0x7984848f90 -> sp=0x7984848f20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1733881] [libmetasec_ov.so] 0x7984310eb4!0x104eb4 sub sp, sp, #0x10; sp=0x7984848f20 sp=0x7984848f20 -> sp=0x7984848f10 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1733887] [libmetasec_ov.so] 0x7984310ed0!0x104ed0 add sp, sp, #0x10; sp=0x7984848f10 sp=0x7984848f10 -> sp=0x7984848f20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1733892] [libmetasec_ov.so] 0x7984310ee4!0x104ee4 sub sp, sp, #0x10; sp=0x7984848f20 sp=0x7984848f20 -> sp=0x7984848f10 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1733898] [libmetasec_ov.so] 0x7984310f00!0x104f00 add sp, sp, #0x10; sp=0x7984848f10 sp=0x7984848f10 -> sp=0x7984848f20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1733957] [libmetasec_ov.so] 0x7984310a3c!0x104a3c sub sp, sp, #0xa0; sp=0x7984848f20 sp=0x7984848f20 -> sp=0x7984848e80 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1733970] [libmetasec_ov.so] 0x7984310a70!0x104a70 sub sp, sp, #0x10; sp=0x7984848e80 sp=0x7984848e80 -> sp=0x7984848e70 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1733976] [libmetasec_ov.so] 0x7984310a8c!0x104a8c add sp, sp, #0x10; sp=0x7984848e70 sp=0x7984848e70 -> sp=0x7984848e80 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1733977] [libmetasec_ov.so] 0x7984310a90!0x104a90 sub sp, sp, #0x10; sp=0x7984848e80 sp=0x7984848e80 -> sp=0x7984848e70 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1733983] [libmetasec_ov.so] 0x7984310aac!0x104aac add sp, sp, #0x10; sp=0x7984848e70 sp=0x7984848e70 -> sp=0x7984848e80 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1734228] [libmetasec_ov.so] 0x798435acec!0x14ecec sub sp, sp, #0x130; sp=0x7984848e80 sp=0x7984848e80 -> sp=0x7984848d50 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1742944] [libmetasec_ov.so] 0x798435aed8!0x14eed8 add sp, sp, #0x130; sp=0x7984848d50 sp=0x7984848d50 -> sp=0x7984848e80 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1743012] [libmetasec_ov.so] 0x7984310e70!0x104e70 add sp, sp, #0xa0; sp=0x7984848e80 sp=0x7984848e80 -> sp=0x7984848f20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[1743039] [libmetasec_ov.so] 0x7984311074!0x105074 add sp, sp, #0x70; sp=0x7984848f20 sp=0x7984848f20 -> sp=0x7984848f90 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2439444] [libmetasec_ov.so] 0x798425c670!0x50670 add sp, sp, #0xf0; sp=0x7984848fa0 sp=0x7984848fa0 -> sp=0x7984849090 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2439450] [libmetasec_ov.so] 0x798431bcf8!0x10fcf8 add sp, sp, #0x690; sp=0x7984849090 sp=0x7984849090 -> sp=0x7984849720 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2443795] [libmetasec_ov.so] 0x7984355e68!0x149e68 sub sp, sp, #0x340; sp=0x79848496e0 sp=0x79848496e0 -> sp=0x79848493a0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2445587] [libmetasec_ov.so] 0x7984355e68!0x149e68 sub sp, sp, #0x340; sp=0x7984849300 sp=0x7984849300 -> sp=0x7984848fc0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2446142] [libmetasec_ov.so] 0x798435717c!0x14b17c add sp, sp, #0x340; sp=0x7984848fc0 sp=0x7984848fc0 -> sp=0x7984849300 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2446248] [libmetasec_ov.so] 0x7984355e68!0x149e68 sub sp, sp, #0x340; sp=0x7984849300 sp=0x7984849300 -> sp=0x7984848fc0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2446803] [libmetasec_ov.so] 0x798435717c!0x14b17c add sp, sp, #0x340; sp=0x7984848fc0 sp=0x7984848fc0 -> sp=0x7984849300 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2446909] [libmetasec_ov.so] 0x7984355e68!0x149e68 sub sp, sp, #0x340; sp=0x7984849300 sp=0x7984849300 -> sp=0x7984848fc0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2447397] [libmetasec_ov.so] 0x798435717c!0x14b17c add sp, sp, #0x340; sp=0x7984848fc0 sp=0x7984848fc0 -> sp=0x7984849300 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2447503] [libmetasec_ov.so] 0x7984355e68!0x149e68 sub sp, sp, #0x340; sp=0x7984849300 sp=0x7984849300 -> sp=0x7984848fc0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2447991] [libmetasec_ov.so] 0x798435717c!0x14b17c add sp, sp, #0x340; sp=0x7984848fc0 sp=0x7984848fc0 -> sp=0x7984849300 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2448036] [libmetasec_ov.so] 0x798435717c!0x14b17c add sp, sp, #0x340; sp=0x79848493a0 sp=0x79848493a0 -> sp=0x79848496e0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2455791] [libmetasec_ov.so] 0x798425c670!0x50670 add sp, sp, #0xf0; sp=0x7984849750 sp=0x7984849750 -> sp=0x7984849840 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2455797] [libmetasec_ov.so] 0x798431bc6c!0x10fc6c add sp, sp, #0x570; sp=0x7984849840 sp=0x7984849840 -> sp=0x7984849db0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2455818] [libmetasec_ov.so] 0x798431c574!0x110574 sub sp, sp, #0x10; sp=0x7984849dd0 sp=0x7984849dd0 -> sp=0x7984849dc0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2455824] [libmetasec_ov.so] 0x798431c590!0x110590 add sp, sp, #0x10; sp=0x7984849dc0 sp=0x7984849dc0 -> sp=0x7984849dd0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2455943] [libmetasec_ov.so] 0x798431c574!0x110574 sub sp, sp, #0x10; sp=0x7984849dd0 sp=0x7984849dd0 -> sp=0x7984849dc0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2455949] [libmetasec_ov.so] 0x798431c590!0x110590 add sp, sp, #0x10; sp=0x7984849dc0 sp=0x7984849dc0 -> sp=0x7984849dd0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2457139] [libmetasec_ov.so] 0x798431c65c!0x11065c add sp, sp, #0x70; sp=0x7984849dd0 sp=0x7984849dd0 -> sp=0x7984849e40 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2458223] [libmetasec_ov.so] 0x79843108ec!0x1048ec sub sp, sp, #0x60; sp=0x7984849e40 sp=0x7984849e40 -> sp=0x7984849de0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2458270] [libmetasec_ov.so] 0x7984310938!0x104938 sub sp, sp, #0x10; sp=0x7984849de0 sp=0x7984849de0 -> sp=0x7984849dd0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2458276] [libmetasec_ov.so] 0x7984310954!0x104954 add sp, sp, #0x10; sp=0x7984849dd0 sp=0x7984849dd0 -> sp=0x7984849de0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2460476] [libmetasec_ov.so] 0x79843109b0!0x1049b0 sub sp, sp, #0x10; sp=0x7984849de0 sp=0x7984849de0 -> sp=0x7984849dd0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2460482] [libmetasec_ov.so] 0x79843109cc!0x1049cc add sp, sp, #0x10; sp=0x7984849dd0 sp=0x7984849dd0 -> sp=0x7984849de0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2460483] [libmetasec_ov.so] 0x79843109d0!0x1049d0 sub sp, sp, #0x10; sp=0x7984849de0 sp=0x7984849de0 -> sp=0x7984849dd0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2460489] [libmetasec_ov.so] 0x79843109ec!0x1049ec add sp, sp, #0x10; sp=0x7984849dd0 sp=0x7984849dd0 -> sp=0x7984849de0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2460558] [libmetasec_ov.so] 0x7984310a30!0x104a30 add sp, sp, #0x60; sp=0x7984849de0 sp=0x7984849de0 -> sp=0x7984849e40 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2464835] [libmetasec_ov.so] 0x798430feb0!0x103eb0 sub sp, sp, #0x60; sp=0x7984849e40 sp=0x7984849e40 -> sp=0x7984849de0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2464861] [libmetasec_ov.so] 0x798435aa7c!0x14ea7c sub sp, sp, #0xc0; sp=0x7984849de0 sp=0x7984849de0 -> sp=0x7984849d20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2465668] [libmetasec_ov.so] 0x798435aaf0!0x14eaf0 add sp, sp, #0xc0; sp=0x7984849d20 sp=0x7984849d20 -> sp=0x7984849de0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2465716] [libmetasec_ov.so] 0x798430ff24!0x103f24 sub sp, sp, #0x10; sp=0x7984849de0 sp=0x7984849de0 -> sp=0x7984849dd0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2465722] [libmetasec_ov.so] 0x798430ff40!0x103f40 add sp, sp, #0x10; sp=0x7984849dd0 sp=0x7984849dd0 -> sp=0x7984849de0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2465733] [libmetasec_ov.so] 0x798430ff64!0x103f64 sub sp, sp, #0x10; sp=0x7984849de0 sp=0x7984849de0 -> sp=0x7984849dd0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2465739] [libmetasec_ov.so] 0x798430ff80!0x103f80 add sp, sp, #0x10; sp=0x7984849dd0 sp=0x7984849dd0 -> sp=0x7984849de0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2465754] [libmetasec_ov.so] 0x798430ff8c!0x103f8c sub sp, sp, #0x10; sp=0x7984849de0 sp=0x7984849de0 -> sp=0x7984849dd0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2465760] [libmetasec_ov.so] 0x798430ffa8!0x103fa8 add sp, sp, #0x10; sp=0x7984849dd0 sp=0x7984849dd0 -> sp=0x7984849de0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2465768] [libmetasec_ov.so] 0x798430ffc8!0x103fc8 add sp, sp, #0x60; sp=0x7984849de0 sp=0x7984849de0 -> sp=0x7984849e40 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2469066] [libmetasec_ov.so] 0x798430feb0!0x103eb0 sub sp, sp, #0x60; sp=0x7984849e40 sp=0x7984849e40 -> sp=0x7984849de0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2469092] [libmetasec_ov.so] 0x798435aa7c!0x14ea7c sub sp, sp, #0xc0; sp=0x7984849de0 sp=0x7984849de0 -> sp=0x7984849d20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2469899] [libmetasec_ov.so] 0x798435aaf0!0x14eaf0 add sp, sp, #0xc0; sp=0x7984849d20 sp=0x7984849d20 -> sp=0x7984849de0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2469947] [libmetasec_ov.so] 0x798430ff24!0x103f24 sub sp, sp, #0x10; sp=0x7984849de0 sp=0x7984849de0 -> sp=0x7984849dd0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2469953] [libmetasec_ov.so] 0x798430ff40!0x103f40 add sp, sp, #0x10; sp=0x7984849dd0 sp=0x7984849dd0 -> sp=0x7984849de0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2469964] [libmetasec_ov.so] 0x798430ff64!0x103f64 sub sp, sp, #0x10; sp=0x7984849de0 sp=0x7984849de0 -> sp=0x7984849dd0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2469970] [libmetasec_ov.so] 0x798430ff80!0x103f80 add sp, sp, #0x10; sp=0x7984849dd0 sp=0x7984849dd0 -> sp=0x7984849de0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2469985] [libmetasec_ov.so] 0x798430ff8c!0x103f8c sub sp, sp, #0x10; sp=0x7984849de0 sp=0x7984849de0 -> sp=0x7984849dd0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2469991] [libmetasec_ov.so] 0x798430ffa8!0x103fa8 add sp, sp, #0x10; sp=0x7984849dd0 sp=0x7984849dd0 -> sp=0x7984849de0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2469999] [libmetasec_ov.so] 0x798430ffc8!0x103fc8 add sp, sp, #0x60; sp=0x7984849de0 sp=0x7984849de0 -> sp=0x7984849e40 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2472101] [libmetasec_ov.so] 0x798429caec!0x90aec sub sp, sp, #0x30; sp=0x7984849e40 sp=0x7984849e40 -> sp=0x7984849e10 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2472161] [libmetasec_ov.so] 0x798429cb34!0x90b34 add sp, sp, #0x30; sp=0x7984849e10 sp=0x7984849e10 -> sp=0x7984849e40 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2476215] [libmetasec_ov.so] 0x798429bc9c!0x8fc9c sub sp, sp, #0x3d0; sp=0x7984849e20 sp=0x7984849e20 -> sp=0x7984849a50 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2476235] [libmetasec_ov.so] 0x798425c480!0x50480 sub sp, sp, #0xf0; sp=0x7984849a50 sp=0x7984849a50 -> sp=0x7984849960 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2480624] [libmetasec_ov.so] 0x79842a1a98!0x95a98 sub sp, sp, #0x140; sp=0x7984849950 sp=0x7984849950 -> sp=0x7984849810 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2480681] [libmetasec_ov.so] 0x79842a1bd4!0x95bd4 sub sp, sp, #0x300; sp=0x79848497f0 sp=0x79848497f0 -> sp=0x79848494f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2480699] [libmetasec_ov.so] 0x798425c480!0x50480 sub sp, sp, #0xf0; sp=0x79848494f0 sp=0x79848494f0 -> sp=0x7984849400 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2484783] [libmetasec_ov.so] 0x798425c670!0x50670 add sp, sp, #0xf0; sp=0x7984849400 sp=0x7984849400 -> sp=0x79848494f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2484790] [libmetasec_ov.so] 0x79842a1c30!0x95c30 add sp, sp, #0x300; sp=0x79848494f0 sp=0x79848494f0 -> sp=0x79848497f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2484800] [libmetasec_ov.so] 0x79842997d8!0x8d7d8 sub sp, sp, #0xa0; sp=0x7984849810 sp=0x7984849810 -> sp=0x7984849770 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2484823] [libmetasec_ov.so] 0x7984299830!0x8d830 sub sp, sp, #0x40; sp=0x7984849770 sp=0x7984849770 -> sp=0x7984849730 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2484829] [libmetasec_ov.so] 0x7984299850!0x8d850 sub sp, sp, #0x10; sp=0x7984849730 sp=0x7984849730 -> sp=0x7984849720 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2484833] [libmetasec_ov.so] 0x7984299860!0x8d860 add sp, sp, #0x10; sp=0x7984849720 sp=0x7984849720 -> sp=0x7984849730 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2484838] [libmetasec_ov.so] 0x7984299850!0x8d850 sub sp, sp, #0x10; sp=0x7984849730 sp=0x7984849730 -> sp=0x7984849720 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2484842] [libmetasec_ov.so] 0x7984299860!0x8d860 add sp, sp, #0x10; sp=0x7984849720 sp=0x7984849720 -> sp=0x7984849730 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2484856] [libmetasec_ov.so] 0x79842998b8!0x8d8b8 add sp, sp, #0x40; sp=0x7984849730 sp=0x7984849730 -> sp=0x7984849770 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2484889] [libmetasec_ov.so] 0x7984299950!0x8d950 sub sp, sp, #0x10; sp=0x7984849770 sp=0x7984849770 -> sp=0x7984849760 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2484895] [libmetasec_ov.so] 0x798429996c!0x8d96c add sp, sp, #0x10; sp=0x7984849760 sp=0x7984849760 -> sp=0x7984849770 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2485015] [libmetasec_ov.so] 0x79842a1070!0x95070 sub sp, sp, #0x320; sp=0x7984849710 sp=0x7984849710 -> sp=0x79848493f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2488784] [libmetasec_ov.so] 0x79842a19f8!0x959f8 add sp, sp, #0x320; sp=0x79848493f0 sp=0x79848493f0 -> sp=0x7984849710 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2488893] [libmetasec_ov.so] 0x7984299d40!0x8dd40 add sp, sp, #0xa0; sp=0x7984849770 sp=0x7984849770 -> sp=0x7984849810 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2488900] [libmetasec_ov.so] 0x798429954c!0x8d54c sub sp, sp, #0x50; sp=0x7984849810 sp=0x7984849810 -> sp=0x79848497c0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2488965] [libmetasec_ov.so] 0x79842997d8!0x8d7d8 sub sp, sp, #0xa0; sp=0x79848497c0 sp=0x79848497c0 -> sp=0x7984849720 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2488988] [libmetasec_ov.so] 0x7984299830!0x8d830 sub sp, sp, #0x40; sp=0x7984849720 sp=0x7984849720 -> sp=0x79848496e0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2488994] [libmetasec_ov.so] 0x7984299850!0x8d850 sub sp, sp, #0x10; sp=0x79848496e0 sp=0x79848496e0 -> sp=0x79848496d0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2488998] [libmetasec_ov.so] 0x7984299860!0x8d860 add sp, sp, #0x10; sp=0x79848496d0 sp=0x79848496d0 -> sp=0x79848496e0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2489003] [libmetasec_ov.so] 0x7984299850!0x8d850 sub sp, sp, #0x10; sp=0x79848496e0 sp=0x79848496e0 -> sp=0x79848496d0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2489007] [libmetasec_ov.so] 0x7984299860!0x8d860 add sp, sp, #0x10; sp=0x79848496d0 sp=0x79848496d0 -> sp=0x79848496e0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2489021] [libmetasec_ov.so] 0x79842998b8!0x8d8b8 add sp, sp, #0x40; sp=0x79848496e0 sp=0x79848496e0 -> sp=0x7984849720 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2489054] [libmetasec_ov.so] 0x7984299950!0x8d950 sub sp, sp, #0x10; sp=0x7984849720 sp=0x7984849720 -> sp=0x7984849710 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2489060] [libmetasec_ov.so] 0x798429996c!0x8d96c add sp, sp, #0x10; sp=0x7984849710 sp=0x7984849710 -> sp=0x7984849720 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2489311] [libmetasec_ov.so] 0x7984299d40!0x8dd40 add sp, sp, #0xa0; sp=0x7984849720 sp=0x7984849720 -> sp=0x79848497c0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2489319] [libmetasec_ov.so] 0x79842997d8!0x8d7d8 sub sp, sp, #0xa0; sp=0x79848497c0 sp=0x79848497c0 -> sp=0x7984849720 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2489342] [libmetasec_ov.so] 0x7984299830!0x8d830 sub sp, sp, #0x40; sp=0x7984849720 sp=0x7984849720 -> sp=0x79848496e0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2489348] [libmetasec_ov.so] 0x7984299850!0x8d850 sub sp, sp, #0x10; sp=0x79848496e0 sp=0x79848496e0 -> sp=0x79848496d0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2489352] [libmetasec_ov.so] 0x7984299860!0x8d860 add sp, sp, #0x10; sp=0x79848496d0 sp=0x79848496d0 -> sp=0x79848496e0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2489357] [libmetasec_ov.so] 0x7984299850!0x8d850 sub sp, sp, #0x10; sp=0x79848496e0 sp=0x79848496e0 -> sp=0x79848496d0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2489361] [libmetasec_ov.so] 0x7984299860!0x8d860 add sp, sp, #0x10; sp=0x79848496d0 sp=0x79848496d0 -> sp=0x79848496e0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2489375] [libmetasec_ov.so] 0x79842998b8!0x8d8b8 add sp, sp, #0x40; sp=0x79848496e0 sp=0x79848496e0 -> sp=0x7984849720 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2489408] [libmetasec_ov.so] 0x7984299950!0x8d950 sub sp, sp, #0x10; sp=0x7984849720 sp=0x7984849720 -> sp=0x7984849710 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2489414] [libmetasec_ov.so] 0x798429996c!0x8d96c add sp, sp, #0x10; sp=0x7984849710 sp=0x7984849710 -> sp=0x7984849720 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2489553] [libmetasec_ov.so] 0x79842a1070!0x95070 sub sp, sp, #0x320; sp=0x79848496c0 sp=0x79848496c0 -> sp=0x79848493a0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2493322] [libmetasec_ov.so] 0x79842a19f8!0x959f8 add sp, sp, #0x320; sp=0x79848493a0 sp=0x79848493a0 -> sp=0x79848496c0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2493438] [libmetasec_ov.so] 0x7984299d40!0x8dd40 add sp, sp, #0xa0; sp=0x7984849720 sp=0x7984849720 -> sp=0x79848497c0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2493488] [libmetasec_ov.so] 0x7984299728!0x8d728 sub sp, sp, #0x10; sp=0x79848497c0 sp=0x79848497c0 -> sp=0x79848497b0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2493494] [libmetasec_ov.so] 0x7984299744!0x8d744 add sp, sp, #0x10; sp=0x79848497b0 sp=0x79848497b0 -> sp=0x79848497c0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2493528] [libmetasec_ov.so] 0x79842997cc!0x8d7cc add sp, sp, #0x50; sp=0x79848497c0 sp=0x79848497c0 -> sp=0x7984849810 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2493539] [libmetasec_ov.so] 0x79842a1bbc!0x95bbc add sp, sp, #0x140; sp=0x7984849810 sp=0x7984849810 -> sp=0x7984849950 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2495885] [libmetasec_ov.so] 0x798425c670!0x50670 add sp, sp, #0xf0; sp=0x7984849960 sp=0x7984849960 -> sp=0x7984849a50 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2495891] [libmetasec_ov.so] 0x798429bcfc!0x8fcfc add sp, sp, #0x3d0; sp=0x7984849a50 sp=0x7984849a50 -> sp=0x7984849e20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2501058] [libmetasec_ov.so] 0x7984299d58!0x8dd58 sub sp, sp, #0x300; sp=0x7984849e20 sp=0x7984849e20 -> sp=0x7984849b20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2501077] [libmetasec_ov.so] 0x798425c480!0x50480 sub sp, sp, #0xf0; sp=0x7984849b20 sp=0x7984849b20 -> sp=0x7984849a30 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2545656] [libmetasec_ov.so] 0x798425c670!0x50670 add sp, sp, #0xf0; sp=0x7984849a30 sp=0x7984849a30 -> sp=0x7984849b20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2545663] [libmetasec_ov.so] 0x7984299db8!0x8ddb8 add sp, sp, #0x300; sp=0x7984849b20 sp=0x7984849b20 -> sp=0x7984849e20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2548790] [libmetasec_ov.so] 0x798429cb40!0x90b40 sub sp, sp, #0x70; sp=0x7984849e50 sp=0x7984849e50 -> sp=0x7984849de0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2548892] [libmetasec_ov.so] 0x79842a1ce8!0x95ce8 sub sp, sp, #0xc0; sp=0x7984849de0 sp=0x7984849de0 -> sp=0x7984849d20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2548911] [libmetasec_ov.so] 0x79842a1d34!0x95d34 sub sp, sp, #0x50; sp=0x7984849d20 sp=0x7984849d20 -> sp=0x7984849cd0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2548918] [libmetasec_ov.so] 0x79842a1d5c!0x95d5c sub sp, sp, #0x10; sp=0x7984849cd0 sp=0x7984849cd0 -> sp=0x7984849cc0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2548922] [libmetasec_ov.so] 0x79842a1d6c!0x95d6c add sp, sp, #0x10; sp=0x7984849cc0 sp=0x7984849cc0 -> sp=0x7984849cd0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2548932] [libmetasec_ov.so] 0x79842a1d9c!0x95d9c add sp, sp, #0x50; sp=0x7984849cd0 sp=0x7984849cd0 -> sp=0x7984849d20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2549122] [libmetasec_ov.so] 0x79842a1fe8!0x95fe8 sub sp, sp, #0x70; sp=0x7984849d20 sp=0x7984849d20 -> sp=0x7984849cb0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2549140] [libmetasec_ov.so] 0x79842a2030!0x96030 sub sp, sp, #0x40; sp=0x7984849cb0 sp=0x7984849cb0 -> sp=0x7984849c70 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2549146] [libmetasec_ov.so] 0x79842a2050!0x96050 sub sp, sp, #0x10; sp=0x7984849c70 sp=0x7984849c70 -> sp=0x7984849c60 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2549150] [libmetasec_ov.so] 0x79842a2060!0x96060 add sp, sp, #0x10; sp=0x7984849c60 sp=0x7984849c60 -> sp=0x7984849c70 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2549155] [libmetasec_ov.so] 0x79842a2050!0x96050 sub sp, sp, #0x10; sp=0x7984849c70 sp=0x7984849c70 -> sp=0x7984849c60 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2549159] [libmetasec_ov.so] 0x79842a2060!0x96060 add sp, sp, #0x10; sp=0x7984849c60 sp=0x7984849c60 -> sp=0x7984849c70 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2549173] [libmetasec_ov.so] 0x79842a20b8!0x960b8 add sp, sp, #0x40; sp=0x7984849c70 sp=0x7984849c70 -> sp=0x7984849cb0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2552889] [libmetasec_ov.so] 0x79842a21b0!0x961b0 add sp, sp, #0x70; sp=0x7984849cb0 sp=0x7984849cb0 -> sp=0x7984849d20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2552892] [libmetasec_ov.so] 0x79842a1e44!0x95e44 sub sp, sp, #0x10; sp=0x7984849d20 sp=0x7984849d20 -> sp=0x7984849d10 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2552898] [libmetasec_ov.so] 0x79842a1e60!0x95e60 add sp, sp, #0x10; sp=0x7984849d10 sp=0x7984849d10 -> sp=0x7984849d20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2552930] [libmetasec_ov.so] 0x79842a1e88!0x95e88 sub sp, sp, #0x10; sp=0x7984849d20 sp=0x7984849d20 -> sp=0x7984849d10 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2552936] [libmetasec_ov.so] 0x79842a1ea4!0x95ea4 add sp, sp, #0x10; sp=0x7984849d10 sp=0x7984849d10 -> sp=0x7984849d20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2553271] [libmetasec_ov.so] 0x79842a1ed4!0x95ed4 sub sp, sp, #0x10; sp=0x7984849d20 sp=0x7984849d20 -> sp=0x7984849d10 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2553277] [libmetasec_ov.so] 0x79842a1ef0!0x95ef0 add sp, sp, #0x10; sp=0x7984849d10 sp=0x7984849d10 -> sp=0x7984849d20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2553299] [libmetasec_ov.so] 0x79842a21c8!0x961c8 sub sp, sp, #0x310; sp=0x7984849d00 sp=0x7984849d00 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2553343] [libmetasec_ov.so] 0x798425c480!0x50480 sub sp, sp, #0xf0; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849900 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2676881] [libmetasec_ov.so] 0x798425c670!0x50670 add sp, sp, #0xf0; sp=0x7984849900 sp=0x7984849900 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2676887] [libmetasec_ov.so] 0x79842a2288!0x96288 add sp, sp, #0x310; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849d00 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2676891] [libmetasec_ov.so] 0x79842a1f3c!0x95f3c sub sp, sp, #0x10; sp=0x7984849d20 sp=0x7984849d20 -> sp=0x7984849d10 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2676897] [libmetasec_ov.so] 0x79842a1f58!0x95f58 add sp, sp, #0x10; sp=0x7984849d10 sp=0x7984849d10 -> sp=0x7984849d20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2676912] [libmetasec_ov.so] 0x79842a21c8!0x961c8 sub sp, sp, #0x310; sp=0x7984849d00 sp=0x7984849d00 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2676956] [libmetasec_ov.so] 0x798425c480!0x50480 sub sp, sp, #0xf0; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849900 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2800494] [libmetasec_ov.so] 0x798425c670!0x50670 add sp, sp, #0xf0; sp=0x7984849900 sp=0x7984849900 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2800500] [libmetasec_ov.so] 0x79842a2288!0x96288 add sp, sp, #0x310; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849d00 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2800504] [libmetasec_ov.so] 0x79842a1f3c!0x95f3c sub sp, sp, #0x10; sp=0x7984849d20 sp=0x7984849d20 -> sp=0x7984849d10 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2800510] [libmetasec_ov.so] 0x79842a1f58!0x95f58 add sp, sp, #0x10; sp=0x7984849d10 sp=0x7984849d10 -> sp=0x7984849d20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2800525] [libmetasec_ov.so] 0x79842a21c8!0x961c8 sub sp, sp, #0x310; sp=0x7984849d00 sp=0x7984849d00 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2800569] [libmetasec_ov.so] 0x798425c480!0x50480 sub sp, sp, #0xf0; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849900 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2924107] [libmetasec_ov.so] 0x798425c670!0x50670 add sp, sp, #0xf0; sp=0x7984849900 sp=0x7984849900 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2924113] [libmetasec_ov.so] 0x79842a2288!0x96288 add sp, sp, #0x310; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849d00 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2924117] [libmetasec_ov.so] 0x79842a1f3c!0x95f3c sub sp, sp, #0x10; sp=0x7984849d20 sp=0x7984849d20 -> sp=0x7984849d10 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2924123] [libmetasec_ov.so] 0x79842a1f58!0x95f58 add sp, sp, #0x10; sp=0x7984849d10 sp=0x7984849d10 -> sp=0x7984849d20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2924138] [libmetasec_ov.so] 0x79842a21c8!0x961c8 sub sp, sp, #0x310; sp=0x7984849d00 sp=0x7984849d00 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[2924182] [libmetasec_ov.so] 0x798425c480!0x50480 sub sp, sp, #0xf0; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849900 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3047720] [libmetasec_ov.so] 0x798425c670!0x50670 add sp, sp, #0xf0; sp=0x7984849900 sp=0x7984849900 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3047726] [libmetasec_ov.so] 0x79842a2288!0x96288 add sp, sp, #0x310; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849d00 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3047730] [libmetasec_ov.so] 0x79842a1f3c!0x95f3c sub sp, sp, #0x10; sp=0x7984849d20 sp=0x7984849d20 -> sp=0x7984849d10 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3047736] [libmetasec_ov.so] 0x79842a1f58!0x95f58 add sp, sp, #0x10; sp=0x7984849d10 sp=0x7984849d10 -> sp=0x7984849d20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3047751] [libmetasec_ov.so] 0x79842a21c8!0x961c8 sub sp, sp, #0x310; sp=0x7984849d00 sp=0x7984849d00 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3047795] [libmetasec_ov.so] 0x798425c480!0x50480 sub sp, sp, #0xf0; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849900 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3171333] [libmetasec_ov.so] 0x798425c670!0x50670 add sp, sp, #0xf0; sp=0x7984849900 sp=0x7984849900 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3171339] [libmetasec_ov.so] 0x79842a2288!0x96288 add sp, sp, #0x310; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849d00 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3171343] [libmetasec_ov.so] 0x79842a1f3c!0x95f3c sub sp, sp, #0x10; sp=0x7984849d20 sp=0x7984849d20 -> sp=0x7984849d10 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3171349] [libmetasec_ov.so] 0x79842a1f58!0x95f58 add sp, sp, #0x10; sp=0x7984849d10 sp=0x7984849d10 -> sp=0x7984849d20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3171364] [libmetasec_ov.so] 0x79842a21c8!0x961c8 sub sp, sp, #0x310; sp=0x7984849d00 sp=0x7984849d00 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3171408] [libmetasec_ov.so] 0x798425c480!0x50480 sub sp, sp, #0xf0; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849900 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3294946] [libmetasec_ov.so] 0x798425c670!0x50670 add sp, sp, #0xf0; sp=0x7984849900 sp=0x7984849900 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3294952] [libmetasec_ov.so] 0x79842a2288!0x96288 add sp, sp, #0x310; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849d00 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3294956] [libmetasec_ov.so] 0x79842a1f3c!0x95f3c sub sp, sp, #0x10; sp=0x7984849d20 sp=0x7984849d20 -> sp=0x7984849d10 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3294962] [libmetasec_ov.so] 0x79842a1f58!0x95f58 add sp, sp, #0x10; sp=0x7984849d10 sp=0x7984849d10 -> sp=0x7984849d20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3294977] [libmetasec_ov.so] 0x79842a21c8!0x961c8 sub sp, sp, #0x310; sp=0x7984849d00 sp=0x7984849d00 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3295021] [libmetasec_ov.so] 0x798425c480!0x50480 sub sp, sp, #0xf0; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849900 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3418559] [libmetasec_ov.so] 0x798425c670!0x50670 add sp, sp, #0xf0; sp=0x7984849900 sp=0x7984849900 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3418565] [libmetasec_ov.so] 0x79842a2288!0x96288 add sp, sp, #0x310; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849d00 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3418569] [libmetasec_ov.so] 0x79842a1f3c!0x95f3c sub sp, sp, #0x10; sp=0x7984849d20 sp=0x7984849d20 -> sp=0x7984849d10 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3418575] [libmetasec_ov.so] 0x79842a1f58!0x95f58 add sp, sp, #0x10; sp=0x7984849d10 sp=0x7984849d10 -> sp=0x7984849d20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3418590] [libmetasec_ov.so] 0x79842a21c8!0x961c8 sub sp, sp, #0x310; sp=0x7984849d00 sp=0x7984849d00 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3418634] [libmetasec_ov.so] 0x798425c480!0x50480 sub sp, sp, #0xf0; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849900 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3542172] [libmetasec_ov.so] 0x798425c670!0x50670 add sp, sp, #0xf0; sp=0x7984849900 sp=0x7984849900 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3542178] [libmetasec_ov.so] 0x79842a2288!0x96288 add sp, sp, #0x310; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849d00 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3542182] [libmetasec_ov.so] 0x79842a1f3c!0x95f3c sub sp, sp, #0x10; sp=0x7984849d20 sp=0x7984849d20 -> sp=0x7984849d10 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3542188] [libmetasec_ov.so] 0x79842a1f58!0x95f58 add sp, sp, #0x10; sp=0x7984849d10 sp=0x7984849d10 -> sp=0x7984849d20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3542203] [libmetasec_ov.so] 0x79842a21c8!0x961c8 sub sp, sp, #0x310; sp=0x7984849d00 sp=0x7984849d00 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3542247] [libmetasec_ov.so] 0x798425c480!0x50480 sub sp, sp, #0xf0; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849900 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3665785] [libmetasec_ov.so] 0x798425c670!0x50670 add sp, sp, #0xf0; sp=0x7984849900 sp=0x7984849900 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3665791] [libmetasec_ov.so] 0x79842a2288!0x96288 add sp, sp, #0x310; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849d00 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3665795] [libmetasec_ov.so] 0x79842a1f3c!0x95f3c sub sp, sp, #0x10; sp=0x7984849d20 sp=0x7984849d20 -> sp=0x7984849d10 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3665801] [libmetasec_ov.so] 0x79842a1f58!0x95f58 add sp, sp, #0x10; sp=0x7984849d10 sp=0x7984849d10 -> sp=0x7984849d20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3665816] [libmetasec_ov.so] 0x79842a21c8!0x961c8 sub sp, sp, #0x310; sp=0x7984849d00 sp=0x7984849d00 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3665860] [libmetasec_ov.so] 0x798425c480!0x50480 sub sp, sp, #0xf0; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849900 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3789398] [libmetasec_ov.so] 0x798425c670!0x50670 add sp, sp, #0xf0; sp=0x7984849900 sp=0x7984849900 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3789404] [libmetasec_ov.so] 0x79842a2288!0x96288 add sp, sp, #0x310; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849d00 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3789408] [libmetasec_ov.so] 0x79842a1f3c!0x95f3c sub sp, sp, #0x10; sp=0x7984849d20 sp=0x7984849d20 -> sp=0x7984849d10 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3789414] [libmetasec_ov.so] 0x79842a1f58!0x95f58 add sp, sp, #0x10; sp=0x7984849d10 sp=0x7984849d10 -> sp=0x7984849d20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3789429] [libmetasec_ov.so] 0x79842a21c8!0x961c8 sub sp, sp, #0x310; sp=0x7984849d00 sp=0x7984849d00 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3789473] [libmetasec_ov.so] 0x798425c480!0x50480 sub sp, sp, #0xf0; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849900 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3913011] [libmetasec_ov.so] 0x798425c670!0x50670 add sp, sp, #0xf0; sp=0x7984849900 sp=0x7984849900 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3913017] [libmetasec_ov.so] 0x79842a2288!0x96288 add sp, sp, #0x310; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849d00 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3913021] [libmetasec_ov.so] 0x79842a1f3c!0x95f3c sub sp, sp, #0x10; sp=0x7984849d20 sp=0x7984849d20 -> sp=0x7984849d10 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3913027] [libmetasec_ov.so] 0x79842a1f58!0x95f58 add sp, sp, #0x10; sp=0x7984849d10 sp=0x7984849d10 -> sp=0x7984849d20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3913042] [libmetasec_ov.so] 0x79842a21c8!0x961c8 sub sp, sp, #0x310; sp=0x7984849d00 sp=0x7984849d00 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[3913086] [libmetasec_ov.so] 0x798425c480!0x50480 sub sp, sp, #0xf0; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849900 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4036624] [libmetasec_ov.so] 0x798425c670!0x50670 add sp, sp, #0xf0; sp=0x7984849900 sp=0x7984849900 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4036630] [libmetasec_ov.so] 0x79842a2288!0x96288 add sp, sp, #0x310; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849d00 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4036634] [libmetasec_ov.so] 0x79842a1f3c!0x95f3c sub sp, sp, #0x10; sp=0x7984849d20 sp=0x7984849d20 -> sp=0x7984849d10 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4036640] [libmetasec_ov.so] 0x79842a1f58!0x95f58 add sp, sp, #0x10; sp=0x7984849d10 sp=0x7984849d10 -> sp=0x7984849d20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4036655] [libmetasec_ov.so] 0x79842a21c8!0x961c8 sub sp, sp, #0x310; sp=0x7984849d00 sp=0x7984849d00 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4036699] [libmetasec_ov.so] 0x798425c480!0x50480 sub sp, sp, #0xf0; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849900 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4160237] [libmetasec_ov.so] 0x798425c670!0x50670 add sp, sp, #0xf0; sp=0x7984849900 sp=0x7984849900 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4160243] [libmetasec_ov.so] 0x79842a2288!0x96288 add sp, sp, #0x310; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849d00 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4160247] [libmetasec_ov.so] 0x79842a1f3c!0x95f3c sub sp, sp, #0x10; sp=0x7984849d20 sp=0x7984849d20 -> sp=0x7984849d10 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4160253] [libmetasec_ov.so] 0x79842a1f58!0x95f58 add sp, sp, #0x10; sp=0x7984849d10 sp=0x7984849d10 -> sp=0x7984849d20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4160268] [libmetasec_ov.so] 0x79842a21c8!0x961c8 sub sp, sp, #0x310; sp=0x7984849d00 sp=0x7984849d00 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4160312] [libmetasec_ov.so] 0x798425c480!0x50480 sub sp, sp, #0xf0; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849900 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4283850] [libmetasec_ov.so] 0x798425c670!0x50670 add sp, sp, #0xf0; sp=0x7984849900 sp=0x7984849900 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4283856] [libmetasec_ov.so] 0x79842a2288!0x96288 add sp, sp, #0x310; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849d00 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4283860] [libmetasec_ov.so] 0x79842a1f3c!0x95f3c sub sp, sp, #0x10; sp=0x7984849d20 sp=0x7984849d20 -> sp=0x7984849d10 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4283866] [libmetasec_ov.so] 0x79842a1f58!0x95f58 add sp, sp, #0x10; sp=0x7984849d10 sp=0x7984849d10 -> sp=0x7984849d20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4283881] [libmetasec_ov.so] 0x79842a21c8!0x961c8 sub sp, sp, #0x310; sp=0x7984849d00 sp=0x7984849d00 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4283925] [libmetasec_ov.so] 0x798425c480!0x50480 sub sp, sp, #0xf0; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849900 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4407463] [libmetasec_ov.so] 0x798425c670!0x50670 add sp, sp, #0xf0; sp=0x7984849900 sp=0x7984849900 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4407469] [libmetasec_ov.so] 0x79842a2288!0x96288 add sp, sp, #0x310; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849d00 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4407473] [libmetasec_ov.so] 0x79842a1f3c!0x95f3c sub sp, sp, #0x10; sp=0x7984849d20 sp=0x7984849d20 -> sp=0x7984849d10 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4407479] [libmetasec_ov.so] 0x79842a1f58!0x95f58 add sp, sp, #0x10; sp=0x7984849d10 sp=0x7984849d10 -> sp=0x7984849d20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4407494] [libmetasec_ov.so] 0x79842a21c8!0x961c8 sub sp, sp, #0x310; sp=0x7984849d00 sp=0x7984849d00 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4407538] [libmetasec_ov.so] 0x798425c480!0x50480 sub sp, sp, #0xf0; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849900 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4531076] [libmetasec_ov.so] 0x798425c670!0x50670 add sp, sp, #0xf0; sp=0x7984849900 sp=0x7984849900 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4531082] [libmetasec_ov.so] 0x79842a2288!0x96288 add sp, sp, #0x310; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849d00 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4531086] [libmetasec_ov.so] 0x79842a1f3c!0x95f3c sub sp, sp, #0x10; sp=0x7984849d20 sp=0x7984849d20 -> sp=0x7984849d10 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4531092] [libmetasec_ov.so] 0x79842a1f58!0x95f58 add sp, sp, #0x10; sp=0x7984849d10 sp=0x7984849d10 -> sp=0x7984849d20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4531107] [libmetasec_ov.so] 0x79842a21c8!0x961c8 sub sp, sp, #0x310; sp=0x7984849d00 sp=0x7984849d00 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4531151] [libmetasec_ov.so] 0x798425c480!0x50480 sub sp, sp, #0xf0; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849900 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4654689] [libmetasec_ov.so] 0x798425c670!0x50670 add sp, sp, #0xf0; sp=0x7984849900 sp=0x7984849900 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4654695] [libmetasec_ov.so] 0x79842a2288!0x96288 add sp, sp, #0x310; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849d00 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4654699] [libmetasec_ov.so] 0x79842a1f3c!0x95f3c sub sp, sp, #0x10; sp=0x7984849d20 sp=0x7984849d20 -> sp=0x7984849d10 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4654705] [libmetasec_ov.so] 0x79842a1f58!0x95f58 add sp, sp, #0x10; sp=0x7984849d10 sp=0x7984849d10 -> sp=0x7984849d20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4654720] [libmetasec_ov.so] 0x79842a21c8!0x961c8 sub sp, sp, #0x310; sp=0x7984849d00 sp=0x7984849d00 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4654764] [libmetasec_ov.so] 0x798425c480!0x50480 sub sp, sp, #0xf0; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849900 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4778302] [libmetasec_ov.so] 0x798425c670!0x50670 add sp, sp, #0xf0; sp=0x7984849900 sp=0x7984849900 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4778308] [libmetasec_ov.so] 0x79842a2288!0x96288 add sp, sp, #0x310; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849d00 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4778312] [libmetasec_ov.so] 0x79842a1f3c!0x95f3c sub sp, sp, #0x10; sp=0x7984849d20 sp=0x7984849d20 -> sp=0x7984849d10 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4778318] [libmetasec_ov.so] 0x79842a1f58!0x95f58 add sp, sp, #0x10; sp=0x7984849d10 sp=0x7984849d10 -> sp=0x7984849d20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4778333] [libmetasec_ov.so] 0x79842a21c8!0x961c8 sub sp, sp, #0x310; sp=0x7984849d00 sp=0x7984849d00 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4778377] [libmetasec_ov.so] 0x798425c480!0x50480 sub sp, sp, #0xf0; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849900 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4901915] [libmetasec_ov.so] 0x798425c670!0x50670 add sp, sp, #0xf0; sp=0x7984849900 sp=0x7984849900 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4901921] [libmetasec_ov.so] 0x79842a2288!0x96288 add sp, sp, #0x310; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849d00 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4901925] [libmetasec_ov.so] 0x79842a1f3c!0x95f3c sub sp, sp, #0x10; sp=0x7984849d20 sp=0x7984849d20 -> sp=0x7984849d10 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4901931] [libmetasec_ov.so] 0x79842a1f58!0x95f58 add sp, sp, #0x10; sp=0x7984849d10 sp=0x7984849d10 -> sp=0x7984849d20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4901946] [libmetasec_ov.so] 0x79842a21c8!0x961c8 sub sp, sp, #0x310; sp=0x7984849d00 sp=0x7984849d00 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[4901990] [libmetasec_ov.so] 0x798425c480!0x50480 sub sp, sp, #0xf0; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849900 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5025528] [libmetasec_ov.so] 0x798425c670!0x50670 add sp, sp, #0xf0; sp=0x7984849900 sp=0x7984849900 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5025534] [libmetasec_ov.so] 0x79842a2288!0x96288 add sp, sp, #0x310; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849d00 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5025538] [libmetasec_ov.so] 0x79842a1f3c!0x95f3c sub sp, sp, #0x10; sp=0x7984849d20 sp=0x7984849d20 -> sp=0x7984849d10 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5025544] [libmetasec_ov.so] 0x79842a1f58!0x95f58 add sp, sp, #0x10; sp=0x7984849d10 sp=0x7984849d10 -> sp=0x7984849d20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5025559] [libmetasec_ov.so] 0x79842a21c8!0x961c8 sub sp, sp, #0x310; sp=0x7984849d00 sp=0x7984849d00 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5025603] [libmetasec_ov.so] 0x798425c480!0x50480 sub sp, sp, #0xf0; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849900 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5149141] [libmetasec_ov.so] 0x798425c670!0x50670 add sp, sp, #0xf0; sp=0x7984849900 sp=0x7984849900 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5149147] [libmetasec_ov.so] 0x79842a2288!0x96288 add sp, sp, #0x310; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849d00 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5149151] [libmetasec_ov.so] 0x79842a1f3c!0x95f3c sub sp, sp, #0x10; sp=0x7984849d20 sp=0x7984849d20 -> sp=0x7984849d10 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5149157] [libmetasec_ov.so] 0x79842a1f58!0x95f58 add sp, sp, #0x10; sp=0x7984849d10 sp=0x7984849d10 -> sp=0x7984849d20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5149172] [libmetasec_ov.so] 0x79842a21c8!0x961c8 sub sp, sp, #0x310; sp=0x7984849d00 sp=0x7984849d00 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5149216] [libmetasec_ov.so] 0x798425c480!0x50480 sub sp, sp, #0xf0; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849900 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5272754] [libmetasec_ov.so] 0x798425c670!0x50670 add sp, sp, #0xf0; sp=0x7984849900 sp=0x7984849900 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5272760] [libmetasec_ov.so] 0x79842a2288!0x96288 add sp, sp, #0x310; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849d00 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5272764] [libmetasec_ov.so] 0x79842a1f3c!0x95f3c sub sp, sp, #0x10; sp=0x7984849d20 sp=0x7984849d20 -> sp=0x7984849d10 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5272770] [libmetasec_ov.so] 0x79842a1f58!0x95f58 add sp, sp, #0x10; sp=0x7984849d10 sp=0x7984849d10 -> sp=0x7984849d20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5272785] [libmetasec_ov.so] 0x79842a21c8!0x961c8 sub sp, sp, #0x310; sp=0x7984849d00 sp=0x7984849d00 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5272829] [libmetasec_ov.so] 0x798425c480!0x50480 sub sp, sp, #0xf0; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849900 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5396367] [libmetasec_ov.so] 0x798425c670!0x50670 add sp, sp, #0xf0; sp=0x7984849900 sp=0x7984849900 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5396373] [libmetasec_ov.so] 0x79842a2288!0x96288 add sp, sp, #0x310; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849d00 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5396377] [libmetasec_ov.so] 0x79842a1f3c!0x95f3c sub sp, sp, #0x10; sp=0x7984849d20 sp=0x7984849d20 -> sp=0x7984849d10 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5396383] [libmetasec_ov.so] 0x79842a1f58!0x95f58 add sp, sp, #0x10; sp=0x7984849d10 sp=0x7984849d10 -> sp=0x7984849d20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5396398] [libmetasec_ov.so] 0x79842a21c8!0x961c8 sub sp, sp, #0x310; sp=0x7984849d00 sp=0x7984849d00 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5396442] [libmetasec_ov.so] 0x798425c480!0x50480 sub sp, sp, #0xf0; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849900 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5519980] [libmetasec_ov.so] 0x798425c670!0x50670 add sp, sp, #0xf0; sp=0x7984849900 sp=0x7984849900 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5519986] [libmetasec_ov.so] 0x79842a2288!0x96288 add sp, sp, #0x310; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849d00 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5519990] [libmetasec_ov.so] 0x79842a1f3c!0x95f3c sub sp, sp, #0x10; sp=0x7984849d20 sp=0x7984849d20 -> sp=0x7984849d10 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5519996] [libmetasec_ov.so] 0x79842a1f58!0x95f58 add sp, sp, #0x10; sp=0x7984849d10 sp=0x7984849d10 -> sp=0x7984849d20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5520011] [libmetasec_ov.so] 0x79842a21c8!0x961c8 sub sp, sp, #0x310; sp=0x7984849d00 sp=0x7984849d00 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5520055] [libmetasec_ov.so] 0x798425c480!0x50480 sub sp, sp, #0xf0; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849900 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5643593] [libmetasec_ov.so] 0x798425c670!0x50670 add sp, sp, #0xf0; sp=0x7984849900 sp=0x7984849900 -> sp=0x79848499f0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5643599] [libmetasec_ov.so] 0x79842a2288!0x96288 add sp, sp, #0x310; sp=0x79848499f0 sp=0x79848499f0 -> sp=0x7984849d00 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5643603] [libmetasec_ov.so] 0x79842a1f3c!0x95f3c sub sp, sp, #0x10; sp=0x7984849d20 sp=0x7984849d20 -> sp=0x7984849d10 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5643609] [libmetasec_ov.so] 0x79842a1f58!0x95f58 add sp, sp, #0x10; sp=0x7984849d10 sp=0x7984849d10 -> sp=0x7984849d20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5643943] [libmetasec_ov.so] 0x79842a1fdc!0x95fdc add sp, sp, #0xc0; sp=0x7984849d20 sp=0x7984849d20 -> sp=0x7984849de0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5643950] [libmetasec_ov.so] 0x798429ccc8!0x90cc8 sub sp, sp, #0x40; sp=0x7984849de0 sp=0x7984849de0 -> sp=0x7984849da0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5643956] [libmetasec_ov.so] 0x798429cce8!0x90ce8 sub sp, sp, #0x10; sp=0x7984849da0 sp=0x7984849da0 -> sp=0x7984849d90 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5643960] [libmetasec_ov.so] 0x798429ccf8!0x90cf8 add sp, sp, #0x10; sp=0x7984849d90 sp=0x7984849d90 -> sp=0x7984849da0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5643965] [libmetasec_ov.so] 0x798429cce8!0x90ce8 sub sp, sp, #0x10; sp=0x7984849da0 sp=0x7984849da0 -> sp=0x7984849d90 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5643969] [libmetasec_ov.so] 0x798429ccf8!0x90cf8 add sp, sp, #0x10; sp=0x7984849d90 sp=0x7984849d90 -> sp=0x7984849da0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5643983] [libmetasec_ov.so] 0x798429cd50!0x90d50 add sp, sp, #0x40; sp=0x7984849da0 sp=0x7984849da0 -> sp=0x7984849de0 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5644619] [libmetasec_ov.so] 0x798429cda8!0x90da8 add sp, sp, #0x70; sp=0x7984849de0 sp=0x7984849de0 -> sp=0x7984849e50 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5650618] [libmetasec_ov.so] 0x7984299d58!0x8dd58 sub sp, sp, #0x300; sp=0x7984849e20 sp=0x7984849e20 -> sp=0x7984849b20 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5650621] [libmetasec_ov.so] 0x7984299d64!0x8dd64 add x9, sp, #0x28; x9=0x798484b0e0 sp=0x7984849b20 -> x9=0x7984849b48 
+      tainted: {sp, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5650627] [libmetasec_ov.so] 0x7984299d7c!0x8dd7c add x9, x9, #0x2c8; x9=0x7984849b48 x9=0x7984849b48 -> x9=0x7984849e10 
+      tainted: {x9, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5650634] [libmetasec_ov.so] 0x7984299d98!0x8dd98 stp x10, x9, [sp, #0x10]; x10=0x79842a2eb8 x9=0x7984849e10 sp=0x7984849b20 mem_w=0x7984849b30 
+      tainted: {x9, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5650660] [libmetasec_ov.so] 0x798425c4dc!0x504dc ldp x30, x11, [x4]; lr=0x7984299da4 x11=0xa060400a021040 x4=0x7984849b30 mem_r=0x7984849b30 -> lr=0x79842a2eb8 x11=0x7984849e10 
+      tainted: {mem:0x798439520a, mem:0x7984395d6f, mem:0x7984395a49, mem:0x798439565f, mem:0x7984849b38}
+
+[5650697] [libmetasec_ov.so] 0x798425c570!0x50570 mov x3, x11; x3=0x0 x11=0x7984849e10 -> x3=0x7984849e10 
+      tainted: {x11, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5650701] [libmetasec_ov.so] 0x798425c580!0x50580 sub x1, x3, #0x10; x1=0x7984849b20 x3=0x7984849e10 -> x1=0x7984849e00 
+      tainted: {x3, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[5650713] [libmetasec_ov.so] 0x798425c5b0!0x505b0 stur x1, [x29, #-0x68]; x1=0x7984849e00 fp=0x7984849b10 mem_w=0x7984849aa8 
+      tainted: {x1, mem:0x798439520a, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[6592850] [libmetasec_ov.so] 0x7984358d44!0x14cd44 ldr w0, [x10, w21, uxtw #2]; w0=0x84849a00 x10=0x798439516c w21=0x9e mem_r=0x798439520a -> w0=0xb000000 
+      tainted: {mem:0x798439520a, mem:0x7984849aa8, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[6592855] [libmetasec_ov.so] 0x7984358d58!0x14cd58 ldr w6, [x11, w6, uxtw #2]; w6=0xf3 x11=0x798439556c w6=0xf3 mem_r=0x798439565f -> w6=0xd0000 
+      tainted: {x0, mem:0x7984849aa8, mem:0x7984395d6f, mem:0x798439565f, mem:0x7984395a49}
+
+[6592863] [libmetasec_ov.so] 0x7984358d78!0x14cd78 ldr w5, [x12, w5, uxtw #2]; w5=0xdd x12=0x798439596c w5=0xdd mem_r=0x7984395a49 -> w5=0xc100 
+      tainted: {x0, x6, mem:0x7984849aa8, mem:0x7984395a49, mem:0x7984395d6f}
+
+[6592868] [libmetasec_ov.so] 0x7984358d8c!0x14cd8c ldr w3, [x4, w3, uxtw #2]; w3=0x3 x4=0x7984395d6c w3=0x3 mem_r=0x7984395d6f -> w3=0x7b 
+      tainted: {x0, x5, x6, mem:0x7984849aa8, mem:0x7984395d6f}
+
+[6592870] [libmetasec_ov.so] 0x7984358d94!0x14cd94 ldp w17, w1, [x8, #0x24]; w17=0xb9 w1=0xe6 x8=0x7984849a80 mem_r=0x7984849aa4 -> w17=0xf262ce4 w1=0xf7a22519 
+      tainted: {x0, x3, x5, x6, mem:0x7984849aa8}
+
+[6592874] [libmetasec_ov.so] 0x7984358da4!0x14cda4 eor w0, w6, w0; w0=0xb000000 w6=0xd0000 w0=0xb000000 -> w0=0xb0d0000 
+      tainted: {x0, x1, x3, x5, x6}
+
+[6592878] [libmetasec_ov.so] 0x7984358db4!0x14cdb4 eor w15, w0, w5; w15=0x549d0000 w0=0xb0d0000 w5=0xc100 -> w15=0xb0dc100 
+      tainted: {x0, x1, x3, x5}
+
+[6592882] [libmetasec_ov.so] 0x7984358dc4!0x14cdc4 eor w13, w15, w3; w13=0x12 w15=0xb0dc100 w3=0x7b -> w13=0xb0dc17b 
+      tainted: {x1, x3, x15}
+
+[6592886] [libmetasec_ov.so] 0x7984358dd4!0x14cdd4 eor w12, w13, w1; w12=0x549da61f w13=0xb0dc17b w1=0xf7a22519 -> w12=0xfcafe462 
+      tainted: {x1, x13}
+

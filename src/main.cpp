@@ -66,18 +66,27 @@ void init(const char *module_names, char *trace_file_path, int thread_id, GUM_OP
 
     auto module_names_vector = Utils::str_split(module_names, ',');
     for (const auto &module_name: module_names_vector) {
-        auto &module_map = instance->modules[module_name];
         auto *gum_module = gum_process_find_module_by_name(module_name.c_str());
+        if (gum_module == nullptr) {
+            LOGE("module not found: %s", module_name.c_str());
+            continue;
+        }
+        auto &module_map = instance->modules[module_name];
         gum_module_enumerate_symbols(gum_module, module_symbols_cb, nullptr);
-        gum_module_enumerate_dependencies(gum_module, module_dependency_cb, nullptr);;
+        gum_module_enumerate_dependencies(gum_module, module_dependency_cb, nullptr);
         auto *gum_module_range = gum_module_get_range(gum_module);
-        module_map ["base"] = gum_module_range->base_address;
-        module_map ["size"] = gum_module_range->size;
+        module_map["base"] = gum_module_range->base_address;
+        module_map["size"] = gum_module_range->size;
     }
 
     gum_process_enumerate_modules(module_enumerate, nullptr);
 
-    memcpy(instance->trace_file_path, trace_file_path, strlen(trace_file_path));
+    size_t path_len = strlen(trace_file_path);
+    if (path_len >= sizeof(instance->trace_file_path)) {
+        path_len = sizeof(instance->trace_file_path) - 1;
+    }
+    memcpy(instance->trace_file_path, trace_file_path, path_len);
+    instance->trace_file_path[path_len] = '\0';
     instance->trace_thread_id = thread_id;
     instance->trace_file = std::ofstream(instance->trace_file_path, std::ios::out | std::ios::trunc);
 

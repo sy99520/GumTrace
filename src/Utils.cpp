@@ -403,9 +403,16 @@ void Utils::auto_snprintf(int& counter, char* buff, const char* __restrict __for
         return;
     }
 
+    int remaining = BUFFER_SIZE - counter;
+    if (remaining <= 0) {
+        return;
+    }
+
     va_list args;
     va_start(args, __format);
-    int written = vsnprintf(buff + counter, BUFFER_SIZE, __format, args);
+    int written = vsnprintf(buff + counter, remaining, __format, args);
     va_end(args);
-    counter += written;
+    if (written > 0) {
+        counter += (written < remaining) ? written : remaining - 1;
+    }
 }

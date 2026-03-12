@@ -42,7 +42,7 @@ RegId TraceParser::parse_reg_name(const char* s, int len) {
     case 'w': case 'W':
         if (len == 2 && s[1] >= '0' && s[1] <= '9')
             return (RegId)(REG_X0 + (s[1] - '0'));  // w→x 直接归一化
-        if (len == 3 && s[1] >= '0' && s[1] <= '2' && s[2] >= '0' && s[2] <= '9') {
+        if (len == 3 && s[1] >= '0' && s[1] <= '3' && s[2] >= '0' && s[2] <= '9') {
             int n = (s[1] - '0') * 10 + (s[2] - '0');
             if (n <= 30) return (RegId)(REG_X0 + n);
         }
@@ -93,6 +93,14 @@ RegId TraceParser::parse_reg_name(const char* s, int len) {
             if (n <= 31) return (RegId)(REG_Q0 + n);
         }
         // 避免与 branch 指令助记符冲突：b.eq 等不会进入这里（那些是 mnemonic 不是 reg）
+        break;
+    case 'v': case 'V':
+        // v0-v31 → 归一化到 q 系列
+        if (len >= 2 && s[1] >= '0' && s[1] <= '9') {
+            int n = s[1] - '0';
+            if (len == 3 && s[2] >= '0' && s[2] <= '9') n = n * 10 + (s[2] - '0');
+            if (n <= 31) return (RegId)(REG_Q0 + n);
+        }
         break;
     case 'n':
         if (len == 4 && memcmp(s, "nzcv", 4) == 0) return REG_NZCV;
@@ -161,8 +169,11 @@ InsnCategory TraceParser::classify_mnemonic(const char* m, int len) {
             return InsnCategory::ARITHMETIC;
         break;
     case 'n':
-        if (mnem_eq(m, len, "neg") || mnem_eq(m, len, "ngc"))
+        if (mnem_eq(m, len, "neg") || mnem_eq(m, len, "negs") ||
+            mnem_eq(m, len, "ngc") || mnem_eq(m, len, "ngcs"))
             return InsnCategory::DATA_MOVE;
+        if (mnem_eq(m, len, "nop"))
+            return InsnCategory::BRANCH;
         break;
     case 'c':
         if (mnem_eq(m, len, "cls") || mnem_eq(m, len, "clz"))
@@ -189,6 +200,9 @@ InsnCategory TraceParser::classify_mnemonic(const char* m, int len) {
             return InsnCategory::IMM_LOAD;
         if (mnem_eq(m, len, "asr"))
             return InsnCategory::SHIFT_EXT;
+        // PAC 认证指令（autiasp, autibsp, autia, autib, autda, autdb）
+        if (len >= 5 && memcmp(m, "aut", 3) == 0)
+            return InsnCategory::BRANCH;
         break;
     case 's':
         if (mnem_eq(m, len, "sub") || mnem_eq(m, len, "subs") ||
@@ -201,12 +215,20 @@ InsnCategory TraceParser::classify_mnemonic(const char* m, int len) {
             mnem_eq(m, len, "strh") || mnem_eq(m, len, "stur") ||
             mnem_eq(m, len, "sturb") || mnem_eq(m, len, "sturh") ||
             mnem_eq(m, len, "stp") || mnem_eq(m, len, "stlr") ||
-            mnem_eq(m, len, "stlrb") || mnem_eq(m, len, "stlrh"))
+            mnem_eq(m, len, "stlrb") || mnem_eq(m, len, "stlrh") ||
+            mnem_eq(m, len, "stxr") || mnem_eq(m, len, "stlxr") ||
+            mnem_eq(m, len, "stxrb") || mnem_eq(m, len, "stlxrb") ||
+            mnem_eq(m, len, "stxrh") || mnem_eq(m, len, "stlxrh") ||
+            mnem_eq(m, len, "stxp") || mnem_eq(m, len, "stlxp"))
             return InsnCategory::STORE;
         if (mnem_eq(m, len, "sbfm") || mnem_eq(m, len, "sbfx"))
             return InsnCategory::BITFIELD;
         if (mnem_eq(m, len, "sxtb") || mnem_eq(m, len, "sxth") || mnem_eq(m, len, "sxtw"))
             return InsnCategory::SHIFT_EXT;
+        if (mnem_eq(m, len, "scvtf"))
+            return InsnCategory::DATA_MOVE;
+        if (mnem_eq(m, len, "svc"))
+            return InsnCategory::BRANCH;
         break;
     case 'l':
         if (mnem_eq(m, len, "ldr") || mnem_eq(m, len, "ldrb") ||
@@ -217,10 +239,22 @@ InsnCategory TraceParser::classify_mnemonic(const char* m, int len) {
             mnem_eq(m, len, "ldursb") || mnem_eq(m, len, "ldursh") ||
             mnem_eq(m, len, "ldp") || mnem_eq(m, len, "ldpsw") ||
             mnem_eq(m, len, "ldar") || mnem_eq(m, len, "ldarb") ||
-            mnem_eq(m, len, "ldarh"))
+            mnem_eq(m, len, "ldarh") ||
+            mnem_eq(m, len, "ldxr") || mnem_eq(m, len, "ldaxr") ||
+            mnem_eq(m, len, "ldxrb") || mnem_eq(m, len, "ldaxrb") ||
+            mnem_eq(m, len, "ldxrh") || mnem_eq(m, len, "ldaxrh") ||
+            mnem_eq(m, len, "ldxp") || mnem_eq(m, len, "ldaxp") ||
+            mnem_eq(m, len, "ldnp") || mnem_eq(m, len, "ldtr") ||
+            mnem_eq(m, len, "ldtrb") || mnem_eq(m, len, "ldtrh") ||
+            mnem_eq(m, len, "ldtrsw") || mnem_eq(m, len, "ldtrsb") ||
+            mnem_eq(m, len, "ldtrsh"))
             return InsnCategory::LOAD;
         if (mnem_eq(m, len, "lsl") || mnem_eq(m, len, "lsr"))
             return InsnCategory::SHIFT_EXT;
+        break;
+    case 'd':
+        if (mnem_eq(m, len, "dmb") || mnem_eq(m, len, "dsb") || mnem_eq(m, len, "dc"))
+            return InsnCategory::BRANCH;
         break;
     case 'o':
         if (mnem_eq(m, len, "orr") || mnem_eq(m, len, "orn"))
@@ -232,20 +266,47 @@ InsnCategory TraceParser::classify_mnemonic(const char* m, int len) {
         if (mnem_eq(m, len, "extr"))
             return InsnCategory::BITFIELD;
         break;
+    case 'f':
+        if (mnem_eq(m, len, "fmov"))
+            return InsnCategory::DATA_MOVE;
+        if (mnem_eq(m, len, "fadd") || mnem_eq(m, len, "fsub") ||
+            mnem_eq(m, len, "fmul") || mnem_eq(m, len, "fdiv") ||
+            mnem_eq(m, len, "fneg") || mnem_eq(m, len, "fabs") ||
+            mnem_eq(m, len, "fsqrt") || mnem_eq(m, len, "fmadd") ||
+            mnem_eq(m, len, "fmsub") || mnem_eq(m, len, "fnmadd") ||
+            mnem_eq(m, len, "fnmsub") || mnem_eq(m, len, "fmin") ||
+            mnem_eq(m, len, "fmax") || mnem_eq(m, len, "fnmul"))
+            return InsnCategory::ARITHMETIC;
+        if (mnem_eq(m, len, "fcmp") || mnem_eq(m, len, "fccmp") ||
+            mnem_eq(m, len, "fcmpe") || mnem_eq(m, len, "fccmpe"))
+            return InsnCategory::COMPARE;
+        if (mnem_eq(m, len, "fcsel"))
+            return InsnCategory::COND_SELECT;
+        // fcvt 系列、frint 系列 → 数据移动
+        if (len >= 4 && memcmp(m, "fcvt", 4) == 0)
+            return InsnCategory::DATA_MOVE;
+        if (len >= 5 && memcmp(m, "frint", 5) == 0)
+            return InsnCategory::DATA_MOVE;
+        break;
+    case 'i':
+        if (mnem_eq(m, len, "isb") || mnem_eq(m, len, "ic"))
+            return InsnCategory::BRANCH;
+        break;
     case 'b':
         if (mnem_eq(m, len, "bic") || mnem_eq(m, len, "bics"))
             return InsnCategory::LOGIC;
         if (mnem_eq(m, len, "bfm") || mnem_eq(m, len, "bfi") || mnem_eq(m, len, "bfxil"))
             return InsnCategory::BITFIELD;
         if (mnem_eq(m, len, "b") || mnem_eq(m, len, "bl") ||
-            mnem_eq(m, len, "br") || mnem_eq(m, len, "blr"))
+            mnem_eq(m, len, "br") || mnem_eq(m, len, "blr") ||
+            mnem_eq(m, len, "bti"))
             return InsnCategory::BRANCH;
         // b.eq, b.ne, etc.
         if (len >= 2 && m[1] == '.')
             return InsnCategory::BRANCH;
         break;
     case 'r':
-        if (mnem_eq(m, len, "ret"))
+        if (mnem_eq(m, len, "ret") || mnem_eq(m, len, "retaa") || mnem_eq(m, len, "retab"))
             return InsnCategory::BRANCH;
         if (mnem_eq(m, len, "rbit") || mnem_eq(m, len, "rev") ||
             mnem_eq(m, len, "rev16") || mnem_eq(m, len, "rev32") ||
@@ -263,6 +324,8 @@ InsnCategory TraceParser::classify_mnemonic(const char* m, int len) {
             return InsnCategory::BITFIELD;
         if (mnem_eq(m, len, "uxtb") || mnem_eq(m, len, "uxth"))
             return InsnCategory::SHIFT_EXT;
+        if (mnem_eq(m, len, "ucvtf"))
+            return InsnCategory::DATA_MOVE;
         break;
     case 't':
         if (mnem_eq(m, len, "tst"))
@@ -272,8 +335,11 @@ InsnCategory TraceParser::classify_mnemonic(const char* m, int len) {
         break;
     case 'p':
         if (mnem_eq(m, len, "paciasp") || mnem_eq(m, len, "pacibsp") ||
-            mnem_eq(m, len, "pacia") || mnem_eq(m, len, "pacib"))
-            return InsnCategory::OTHER;
+            mnem_eq(m, len, "pacia") || mnem_eq(m, len, "pacib") ||
+            mnem_eq(m, len, "pacda") || mnem_eq(m, len, "pacdb"))
+            return InsnCategory::BRANCH;  // PAC 签名指令，不影响数据流
+        if (mnem_eq(m, len, "prfm") || mnem_eq(m, len, "prfum"))
+            return InsnCategory::BRANCH;  // 预取，不影响数据流
         break;
     }
     return InsnCategory::OTHER;
@@ -613,6 +679,23 @@ bool TraceParser::parse_line(const char* buf, int len, int line_number, long off
         out.mem_write_addr2 = out.mem_write_addr + reg_size;
     }
 
+    // LDP 双读：推断第二个读地址
+    if (out.has_mem_read && out.category == InsnCategory::LOAD) {
+        bool is_ldp_insn = (mnem_len == 3 && memcmp(buf + mnem_start, "ldp", 3) == 0) ||
+                           (mnem_len == 5 && memcmp(buf + mnem_start, "ldpsw", 5) == 0) ||
+                           (mnem_len == 4 && memcmp(buf + mnem_start, "ldxp", 4) == 0) ||
+                           (mnem_len == 5 && memcmp(buf + mnem_start, "ldaxp", 5) == 0) ||
+                           (mnem_len == 4 && memcmp(buf + mnem_start, "ldnp", 4) == 0);
+        if (is_ldp_insn) {
+            int reg_size = 8;
+            if (ops_len > 0 && (ops_start[0] == 'w' || ops_start[0] == 'W')) {
+                reg_size = 4;
+            }
+            out.has_mem_read2 = true;
+            out.mem_read_addr2 = out.mem_read_addr + reg_size;
+        }
+    }
+
     return true;
 }
 
@@ -622,6 +705,48 @@ bool TraceParser::parse_line(const char* buf, int len, int line_number, long off
 
 bool TraceParser::load(const std::string& filepath) {
     return load_range(filepath, INT32_MAX);
+}
+
+bool TraceParser::load_range_by_offset(const std::string& filepath, long max_offset) {
+    filepath_ = filepath;
+    lines_.clear();
+
+    FILE* fp = fopen(filepath.c_str(), "r");
+    if (!fp) {
+        fprintf(stderr, "Error: cannot open file: %s\n", filepath.c_str());
+        return false;
+    }
+
+    lines_.reserve(1024 * 1024);
+
+    static const int BUF_SIZE = 4096;
+    char buf[BUF_SIZE];
+    int line_number = 0;
+    long cur_offset = 0;
+
+    while (cur_offset <= max_offset) {
+        long line_start = cur_offset;
+        if (!fgets(buf, BUF_SIZE, fp)) break;
+
+        line_number++;
+        int len = (int)strlen(buf);
+        cur_offset += len;
+        while (len > 0 && (buf[len-1] == '\n' || buf[len-1] == '\r')) len--;
+
+        if (len == 0) continue;
+
+        if (is_instruction_line(buf, len)) {
+            TraceLine tl = {};
+            if (parse_line(buf, len, line_number, line_start, tl)) {
+                lines_.push_back(tl);
+            }
+        }
+    }
+
+    fclose(fp);
+    fprintf(stderr, "Loaded %zu instruction lines from %d file lines (up to offset %ld).\n",
+            lines_.size(), line_number, max_offset);
+    return true;
 }
 
 bool TraceParser::load_range(const std::string& filepath, int max_line) {
@@ -678,6 +803,22 @@ int TraceParser::find_by_rel_addr(uint64_t rel_addr) const {
         if (lines_[i].rel_addr == rel_addr) return (int)i;
     }
     return -1;
+}
+
+int TraceParser::find_by_offset(long byte_offset) const {
+    // 二分查找（lines_ 按 file_offset 递增）
+    int lo = 0, hi = (int)lines_.size() - 1;
+    while (lo <= hi) {
+        int mid = lo + (hi - lo) / 2;
+        if (lines_[mid].file_offset < byte_offset)
+            lo = mid + 1;
+        else if (lines_[mid].file_offset > byte_offset)
+            hi = mid - 1;
+        else
+            return mid;
+    }
+    // 返回最接近的（>= byte_offset）
+    return (lo < (int)lines_.size()) ? lo : -1;
 }
 
 int TraceParser::find_by_line(int line_number) const {

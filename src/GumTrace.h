@@ -40,7 +40,7 @@ public:
     char trace_file_path[256];
     std::ofstream trace_file;
     int trace_thread_id;
-    int trace_flash = 0;
+    int trace_flush = 0;
     std::unordered_map<size_t, std::string> func_maps;
     FUNC_CONTEXT last_func_context = {};
 
@@ -51,7 +51,7 @@ public:
 
     static void transform_callback(GumStalkerIterator *iterator, GumStalkerOutput *output, gpointer user_data);
     const std::string* in_range_module(size_t address);
-    std::map<std::string, std::size_t> get_module_by_name(const std::string &module_name);
+    const std::map<std::string, std::size_t>& get_module_by_name(const std::string &module_name);
     void follow();
     void unfollow();
 

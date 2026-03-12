@@ -1,0 +1,12 @@
+=== Taint Backward Tracking ===
+Source: x14
+Total matched: 2 instructions
+Stop reason: scan limit reached (1000000 lines without propagation)
+============================================================
+
+[6615335] [libmetasec_ov.so] 0x7984348860!0x13c860 ldrb w13, [x9]; w13=0x46 x9=0x7d78baf9a4 mem_r=0x7d78baf9a4 -> w13=0xbf 
+      tainted: {mem:0x7d78baf9a4}
+
+[6615339] [libmetasec_ov.so] 0x7984348870!0x13c870 lsr x14, x13, #2; x14=0x75 x13=0xbf -> x14=0x2f 
+      tainted: {x13}
+

@@ -2,13 +2,19 @@
 #define TAINT_TAINTENGINE_H
 
 #include "TraceParser.h"
-#include <set>
+#include <unordered_set>
 #include <string>
 #include <vector>
 
 enum class TrackMode {
     FORWARD,
     BACKWARD
+};
+
+enum class StopReason {
+    ALL_TAINT_CLEARED,
+    END_OF_TRACE,
+    SCAN_LIMIT_REACHED
 };
 
 struct TaintSource {
@@ -21,23 +27,29 @@ class TaintEngine {
 public:
     void set_mode(TrackMode mode) { mode_ = mode; }
     void set_source(const TaintSource& source);
+    void set_max_scan_distance(int n) { max_scan_distance_ = n; }
     void run(const std::vector<TraceLine>& lines, int start_index);
     bool write_result(const std::string& output_path, const TraceParser& parser) const;
+    StopReason stop_reason() const { return stop_reason_; }
 
 private:
     TrackMode mode_ = TrackMode::FORWARD;
     TaintSource source_;
+    StopReason stop_reason_ = StopReason::END_OF_TRACE;
+
+    // 无新传播点时的最大扫描行数（默认 100 万行）
+    int max_scan_distance_ = 1000000;
 
     // 位图：快速的寄存器污点集合（覆盖所有 RegId）
     bool reg_taint_[256] = {};
     int tainted_reg_count_ = 0;
-    std::set<uint64_t> tainted_mem_;
+    std::unordered_set<uint64_t> tainted_mem_;
 
     struct ResultEntry {
         int index;          // 在 lines 数组中的索引
         // 快照
         bool reg_snapshot[256];
-        std::set<uint64_t> mem_snapshot;
+        std::unordered_set<uint64_t> mem_snapshot;
     };
     std::vector<ResultEntry> results_;
 
